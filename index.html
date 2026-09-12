@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rosebay Home Cooking &amp; Café — Khao Yai</title>
+<meta name="description" content="A quiet white house in Khao Yai with a serious kitchen. Thai home cooking — kaprao, fried rice, duck eggs — plus coffee, in Nong Nam Daeng, Pak Chong. Open every day 09:00–18:00.">
+<link rel="canonical" href="https://rosebayhomecooking.example/">
+
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Rosebay Home Cooking &amp; Café — Khao Yai">
+<meta property="og:description" content="It looks like a café. We came to cook. Thai home cooking and coffee down a small soi off Thanarat Road, Khao Yai.">
+<meta property="og:image" content="img/house-front.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#12564C">
+
+<style>
+/* Critical, so the veil already covers the page on the first painted frame —
+   before the stylesheets land. Everything else about it is in site.css. */
+.veil{position:fixed;inset:0;z-index:1000;background:#F5F2E9}
+.veil-core{opacity:0}
+html.veil-on,html.veil-on body{overflow:hidden}
+html.veil-skip .veil,html:not(.js) .veil{display:none}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=Jost:wght@200;300;400;500&family=Noto+Sans+Thai:wght@300;400;500;600&family=Noto+Serif+Thai:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/parts.css">
+<script>
+/* Reveals are hidden until JS opens them, so a script failure must not
+   leave the page blank: any script error drops the .js flag and the CSS
+   fallbacks show everything. Resource errors (a missing image) are
+   ignored — only script errors count. It also drops veil-on, because that
+   class locks scrolling. */
+document.documentElement.classList.add('js');
+addEventListener('error', function (e) {
+  if (e && e.target && e.target !== window) return;
+  document.documentElement.classList.remove('js');
+  document.documentElement.classList.remove('veil-on');
+}, true);
+/* The veil is a front door, not a toll gate: it plays once per session, so
+   moving between pages never replays it. Decided here, before the body
+   paints, or a return visit flashes it. */
+try {
+  document.documentElement.classList.add(
+    sessionStorage.getItem('rosebay.seen') ? 'veil-skip' : 'veil-on');
+} catch (e) { document.documentElement.classList.add('veil-on'); }
+/* Hard release. veil-on locks scrolling, so whatever happens to the
+   controller, the page still becomes usable — the CSS failsafe takes the
+   veil itself away on the same timer. */
+setTimeout(function () {
+  document.documentElement.classList.remove('veil-on');
+}, 5000);
+</script>
+</head>
+<body>
+<!-- The front door: Rosebay's own roofline draws, the wordmark arrives, and
+     the table line fills with real loading progress before the veil parts
+     along it. Plays once per session; removed entirely without JavaScript. -->
+<div class="veil" aria-hidden="true">
+  <div class="veil-half veil-top"></div>
+  <div class="veil-half veil-bot"></div>
+  <div class="veil-core">
+    <svg class="veil-mark" viewBox="0 0 120 62" role="presentation" focusable="false">
+      <path class="m-roof" style="--len:118" d="M14 32 L60 8 L106 32"></path>
+      <path class="m-wall" style="--len:114" d="M26 32 L26 54 L94 54 L94 32"></path>
+    </svg>
+    <div class="veil-word">ROSEBAY</div>
+    <div class="veil-sub">HOME COOKING &amp; CAFÉ</div>
+    <div class="veil-line"><i></i></div>
+  </div>
+</div>
+<a class="skip" href="#main" data-th="ข้ามไปเนื้อหาหลัก">Skip to content</a>
+
+<!-- ===== nav ===== -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="mark" href="index.html" aria-label="Rosebay, home">
+      <b>ROSEBAY</b><span>HOME COOKING &amp; CAFÉ</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html#food" data-th="อาหาร">Food</a>
+      <a href="menu.html" data-th="เมนู">Menu</a>
+      <a href="home.html" data-th="เรื่องของร้าน">Our home</a>
+      <a href="index.html#cafe" data-th="คาเฟ่">Café</a>
+      <a href="visit.html#pet" data-th="สัตว์เลี้ยง">Pet friendly</a>
+      <a href="visit.html" data-th="การเดินทาง">Visit</a>
+    </nav>
+    <div class="nav-cta">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true"><span>EN</span></button>
+        <button type="button" data-lang="th" aria-pressed="false"><span>ไทย</span></button>
+      </div>
+      <a class="btn btn-sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทาง">Directions <span class="arw" aria-hidden="true">↗</span></a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Menu" data-th-attr="aria-label:เมนู"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="sheet" id="sheet">
+  <nav aria-label="Mobile">
+    <a href="index.html#food"><span data-th="อาหาร">Food</span><i>01</i></a>
+    <a href="menu.html"><span data-th="เมนู">Menu</span><i>02</i></a>
+    <a href="index.html#kitchen"><span data-th="ครัวเปิด">Open kitchen</span><i>03</i></a>
+    <a href="index.html#cafe"><span data-th="คาเฟ่">Café</span><i>04</i></a>
+    <a href="home.html"><span data-th="เรื่องของร้าน">Our home</span><i>05</i></a>
+    <a href="visit.html#pet"><span data-th="สัตว์เลี้ยง">Pet friendly</span><i>06</i></a>
+    <a href="visit.html"><span data-th="การเดินทาง">Visit</span><i>07</i></a>
+  </nav>
+  <div class="sheet-foot">
+    <div class="label" data-th="เปิดทุกวัน · 09:00 – 18:00">Open every day · 09:00 – 18:00</div>
+    <a class="tlink" href="tel:+66643614569">064-361-4569</a>
+    <div class="sheet-soc">
+      <a class="tlink" href="https://www.instagram.com/rosebayhomecookingcafe/" target="_blank" rel="noopener">Instagram <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="tlink" href="https://www.facebook.com/rosebaycafe/" target="_blank" rel="noopener">Facebook <span class="arw" aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ===== 01 arrive ===== -->
+<section class="hero on-photo" data-rv>
+  <div class="hero-media">
+    <img src="img/house-front.jpg" alt="The Rosebay cottage in Khao Yai: white board-and-batten walls, a teal-green awning and green ROSEBAY letters, with raised timber beds of herbs in front and a big tree beside it." fetchpriority="high" decoding="async" width="2000" height="1500">
+  </div>
+  <div class="wrap hero-in">
+    <div class="hero-meta rv">
+      <span class="label">Rosebay / Home cooking &amp; café</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="label" data-th="เขาใหญ่ ประเทศไทย">Khao Yai, Thailand</span>
+    </div>
+    <h1 class="display d-xl lines">
+      <span><i data-th="กลับบ้าน">Come home</i></span>
+      <span><i data-th="แบบท้องว่าง">hungry.</i></span>
+    </h1>
+    <p class="lede rv" style="--d:420ms" data-th="อาหารไทยฝีมือครัวบ้าน กาแฟ และเวลาที่ช้าลงสักหน่อย ในซอยเล็ก ๆ ริมถนนธนะรัชต์">
+      Thai home cooking, coffee, and a little room to slow down — down a small soi off Thanarat Road.
+    </p>
+    <div class="hero-actions rv" style="--d:560ms">
+      <a class="btn" href="menu.html" data-th="ดูเมนู">View menu <span class="arw" aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทางไปร้าน">Get directions <span class="arw" aria-hidden="true">↗</span></a>
+    </div>
+    <div class="hero-foot rv" style="--d:700ms">
+      <span class="label" data-th="เปิดทุกวัน · 09:00 – 18:00">Open every day · 09:00 – 18:00</span>
+      <a class="label" href="https://www.instagram.com/rosebayhomecookingcafe/" target="_blank" rel="noopener">@rosebayhomecookingcafe ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== the flip ===== -->
+<section class="sect" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">01</span>
+      <span class="label" data-th="ครัวบ้าน / เขาใหญ่">Home cooking / Khao Yai</span>
+    </div>
+    <div class="flip-grid">
+      <div class="flip-copy">
+        <h2 class="display d-lg lines">
+          <span><i class="flip-a" data-th="ข้างนอกเหมือนคาเฟ่">It looks like a café.</i></span>
+          <span><i class="flip-b" data-th="แต่เรามาเพื่อ<em>ทำอาหาร</em>">We came to <em>cook</em>.</i></span>
+        </h2>
+        <div class="mt-l body-w rv" style="--d:260ms">
+          <p data-th="หลังผนังไม้สีขาวและกันสาดสีเขียว คือครัวเปิดที่อยู่กลางร้าน พ่อครัวยืนทำอาหารตรงหน้าคุณ กระทะแทบไม่ได้พัก อาหารเป็นจานเดียวที่คุ้นเคย กะเพรา ข้าวผัด กระเทียม ไข่ ทำมาแบบจริงจัง และให้มาเต็มจาน">
+            Behind the white siding and the green awning is an open kitchen, in the middle of the room, with cooks working in front of you. The pan barely gets a rest. The plates are the ones you already know — kaprao, fried rice, garlic, eggs — cooked hard and served big.
+          </p>
+          <p class="tline-corner" data-th="ลูกค้าเขียนถึงกลิ่นเดียวกันซ้ำ ๆ คือกลิ่นกระทะ">
+            Guests keep writing about the same thing: the smell of the pan.
+          </p>
+        </div>
+        <div class="row mt-l rv" style="--d:380ms">
+          <a class="tlink" href="#food" data-th="ดูว่าเราทำอะไร">See what we cook <span class="arw" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <figure class="flip-fig rv-img r-45" style="--d:200ms">
+        <img src="img/kitchen-cook.jpg" alt="A cook working at the open kitchen counter inside Rosebay." loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 02 the food ===== -->
+<section class="sect ground-tint" id="food" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">02</span>
+      <span class="label" data-th="จากครัว">From the kitchen</span>
+    </div>
+    <h2 class="display d-lg lines">
+      <span><i data-th="คุ้นเคย">Familiar.</i></span>
+      <span><i data-th="แต่ไม่ธรรมดา">Not ordinary.</i></span>
+    </h2>
+
+    <div class="mt-l">
+
+      <article class="dish" data-rv>
+        <figure class="dish-fig rv-img r-45">
+          <img src="img/kaprao-beef.jpg" alt="Kaprao with beef tenderloin over rice, topped with two fried duck eggs with loose orange yolks." loading="lazy" decoding="async">
+        </figure>
+        <div class="dish-txt">
+          <span class="dish-no">01</span>
+          <h3 class="display d-sm" data-th="กะเพราเนื้อสันใน">Kaprao, beef tenderloin</h3>
+          <p class="dish-th">ข้าวกะเพราเนื้อสันในไข่ดาว/ไข่เจียว</p>
+          <p class="mt-m" style="color:var(--fg-2)" data-th="เนื้อสันใน กะเพรา พริก ผัดแห้ง ราดไข่ดาวหรือไข่เจียว">
+            Beef tenderloin, holy basil, chilli, fried dry. Fried egg or omelette on top.
+          </p>
+          <div class="dish-meta">
+            <span class="dish-tag" data-th="ร้านแนะนำ">House pick</span>
+            <span class="dish-price num"><sup>฿</sup>160</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish rev" data-rv>
+        <figure class="dish-fig rv-img r-45">
+          <img src="img/kaprao-crab.jpg" alt="Kaprao crab over rice with a fried duck egg, loose orange yolk, and long beans." loading="lazy" decoding="async">
+        </figure>
+        <div class="dish-txt">
+          <span class="dish-no">02</span>
+          <h3 class="display d-sm" data-th="กะเพราปู">Kaprao, crab</h3>
+          <p class="dish-th">ข้าวกะเพราปูไข่ดาว/ไข่เจียว</p>
+          <p class="mt-m" style="color:var(--fg-2)" data-th="เนื้อปูมาเต็ม เป็นจานที่ลูกค้าเขียนถึงกันบ่อยที่สุด">
+            Crab, and plenty of it — the plate guests write about most.
+          </p>
+          <div class="dish-meta">
+            <span class="dish-tag" data-th="ร้านแนะนำ">House pick</span>
+            <span class="dish-price num"><sup>฿</sup>290</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish" data-rv>
+        <figure class="dish-fig rv-img r-45">
+          <img src="img/kaprao-mince.jpg" alt="Kaprao fried rice with minced pork and crackling pork, a fried duck egg on top." loading="lazy" decoding="async">
+        </figure>
+        <div class="dish-txt">
+          <span class="dish-no">03</span>
+          <h3 class="display d-sm" data-th="ข้าวผัดกะเพราคลุก หมูสับกากหมู">Kaprao fried rice, minced pork &amp; crackling</h3>
+          <p class="dish-th">ข้าวผัดกะเพราคลุกหมูสับกากหมูไข่ดาว</p>
+          <p class="mt-m" style="color:var(--fg-2)" data-th="กะเพราคลุกลงไปในข้าว หมูสับ กากหมู ไข่ดาว">
+            The kaprao stirred through the rice, not spooned over it. Minced pork, crackling, fried egg.
+          </p>
+          <div class="dish-meta">
+            <span class="dish-tag" data-th="จานประจำ">Everyday plate</span>
+            <span class="dish-price num"><sup>฿</sup>150</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish rev" data-rv>
+        <figure class="dish-fig rv-img r-45">
+          <img src="img/friedrice-sau.jpg" alt="Chinese sausage fried rice with cucumber and spring onion on a stoneware plate." loading="lazy" decoding="async">
+        </figure>
+        <div class="dish-txt">
+          <span class="dish-no">04</span>
+          <h3 class="display d-sm" data-th="ข้าวผัดกุนเชียง">Chinese sausage fried rice</h3>
+          <p class="dish-th">ข้าวผัดกุนเชียง</p>
+          <p class="mt-m" style="color:var(--fg-2)" data-th="กุนเชียงหวาน ๆ ข้าวหอมกลิ่นกระทะ จานที่ราคาเบาที่สุดในเมนู">
+            Sweet Chinese sausage, rice that smells of the pan. The gentlest price on the menu.
+          </p>
+          <div class="dish-meta">
+            <span class="dish-tag" data-th="เริ่มต้นที่">From</span>
+            <span class="dish-price num"><sup>฿</sup>120</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="row mt-l" data-rv>
+      <a class="btn" href="menu.html" data-th="ดูเมนูทั้งหมด">The whole menu <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== the table shot: scale, not macro ===== -->
+<figure class="table-shot rv-img" data-rv>
+  <img src="img/kaprao-table.jpg" alt="Two plates of kaprao with fried eggs and cucumber on a wooden table at Rosebay." loading="lazy" decoding="async">
+  <figcaption data-th="จานเดียว ให้มาเต็ม">One plate each. Nobody leaves hungry.</figcaption>
+</figure>
+
+<!-- ===== 03 pan to plate — THE SIGNATURE ===== -->
+<section class="ground-kitchen" id="kitchen" data-pan>
+  <div class="pan">
+    <div class="pan-sticky">
+      <div class="pan-ticks" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+      <div class="pan-stage">
+        <div class="pan-disc" style="--s:.42;--heat:1">
+          <img class="on" src="img/kitchen-pass.jpg" alt="The pass in Rosebay's open kitchen during service." loading="eager" decoding="async">
+          <img src="img/kitchen-cook.jpg" alt="The open kitchen counter, cooks working behind it." loading="eager" decoding="async">
+          <img src="img/kaprao-over.jpg" alt="Kaprao with a fried duck egg, the yolk still loose." loading="eager" decoding="async">
+          <img src="img/kaprao-beef.jpg" alt="A finished plate of kaprao with two fried duck eggs, on the table." loading="eager" decoding="async">
+        </div>
+        <svg class="pan-rim" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="trk" cx="50" cy="50" r="49"></circle>
+          <circle class="bar" cx="50" cy="50" r="49"></circle>
+        </svg>
+      </div>
+
+      <div class="pan-cap">
+        <div class="pan-step on">
+          <div class="label">03 / <span data-th="จากกระทะ ถึงจาน">From pan to plate</span></div>
+          <h3 class="display d-md" data-th="กระทะร้อน บ้านเงียบ">Hot pan. Quiet house.</h3>
+          <p data-th="ร้านเปิดเก้าโมง จากนั้นกระทะแทบไม่ได้เย็นลงอีกเลย">
+            The doors open at nine. After that the pan does not really cool down again.
+          </p>
+        </div>
+        <div class="pan-step">
+          <div class="label" data-th="ครัวเปิด">The open kitchen</div>
+          <h3 class="display d-md" data-th="อยู่กลางร้าน">In the middle of the room.</h3>
+          <p data-th="ไม่ได้ซ่อนไว้ข้างหลัง ครัวอยู่ตรงกลาง คุณเห็นทุกจานที่ถูกทำขึ้น">
+            Not hidden at the back. The kitchen sits in the middle, and you watch every plate being made.
+          </p>
+        </div>
+        <div class="pan-step">
+          <div class="label" data-th="ไข่เป็ด">The eggs</div>
+          <h3 class="display d-md" data-th="ไข่เป็ด ขอบกรอบ">Duck eggs, crisp at the edge.</h3>
+          <p data-th="ไข่เป็ด ไม่ใช่ไข่ไก่ ทอดจนขอบกรอบ ไม่อมน้ำมัน ไข่แดงยังไม่สุก">
+            Duck, not chicken. Fried until the edge is crisp and not oily, with the yolk still loose.
+          </p>
+        </div>
+        <div class="pan-step">
+          <div class="label" data-th="เสิร์ฟ">On the table</div>
+          <h3 class="display d-md" data-th="ข้าว กะเพรา ไข่แดงสองฟอง">Rice, kaprao, two yolks.</h3>
+          <p data-th="สั่งเก้าโมงเช้าก็ได้ บ่ายสามก็ได้ ทำเหมือนกันทุกจาน">
+            Order it at nine in the morning or three in the afternoon. It arrives the same either way.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 café ===== -->
+<section class="sect" id="cafe" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">04</span>
+      <span class="label" data-th="หลังมื้อกลางวัน">After lunch</span>
+    </div>
+    <div class="cafe-grid">
+      <div class="cafe-copy">
+        <h2 class="display d-lg lines">
+          <span><i data-th="นั่งต่อ">Stay for</i></span>
+          <span><i data-th="อีกสักแก้ว">another cup.</i></span>
+        </h2>
+        <div class="mt-l rv" style="--d:220ms">
+          <p style="color:var(--fg-2)" data-th="ครึ่งหลังของร้านคือคาเฟ่ กาแฟ มัทฉะ น้ำตะไคร้ น้ำมังคุด และตู้ของหวานตรงเคาน์เตอร์ ไม่มีใครไล่ให้ลุก">
+            The other half of Rosebay is a café. Coffee, matcha, lemongrass and mangosteen juice, and a chilled cabinet of sweets by the counter. Nobody moves you along.
+          </p>
+          <p class="tline-corner mt-m" style="color:var(--fg-3)" data-th="อาหารมาก่อน กาแฟตามหลัง ตามลำดับนั้นแหละ">
+            Lunch first, coffee after. In that order.
+          </p>
+        </div>
+      </div>
+      <figure class="cafe-a rv-img r-34" style="--d:120ms">
+        <img src="img/latte.webp" alt="A latte with leaf art in a cup on a wooden table at Rosebay." loading="lazy" decoding="async">
+      </figure>
+      <figure class="cafe-b rv-img r-45 cap" style="--d:240ms">
+        <img src="img/sign-wall.jpg" alt="A hand holding an iced coffee in a Rosebay cup, in front of the green ROSEBAY letters on the white siding." loading="lazy" decoding="async">
+        <figcaption data-th="กาแฟเย็น ใต้ป้ายร้าน">An iced coffee, under the sign</figcaption>
+      </figure>
+      <figure class="cafe-c rv-img r-32" style="--d:360ms">
+        <img src="img/espresso.jpg" alt="A small espresso in a glass on a green saucer, on a timber table." loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 our home ===== -->
+<section class="sect ground-green" id="home" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">05</span>
+      <span class="label">Rosebay</span>
+    </div>
+    <div class="home-grid">
+      <div class="home-a">
+        <div class="rosebay display d-lg">
+          <span><b>ROSE</b></span>
+          <em class="gloss" style="--d:300ms" data-th="นามสกุลเดิมของเจ้าของร้าน แปลว่า กุหลาบ">Her family name — a rose</em>
+          <span><b>BAY</b></span>
+          <em class="gloss" style="--d:500ms" data-th="อ่าวในออสเตรเลีย ที่เธอไปเรียนทำอาหาร">A bay in Australia, where she learned to cook</em>
+        </div>
+      </div>
+      <div class="home-b">
+        <h2 class="display d-md" data-th="บ้านสีขาวหลังเล็ก ๆ ในเขาใหญ่">A little white house in Khao Yai.</h2>
+        <div class="mt-m body-w">
+          <p data-th="ชื่อร้านคือสองบ้านรวมกัน นามสกุลเดิมของเจ้าของร้านที่แปลว่ากุหลาบ และชื่ออ่าวในออสเตรเลียที่เธอเริ่มเรียนทำอาหาร">
+            The name puts two homes into one word: the owner's former family name, which means rose, and the bay in Australia where she first learned to cook.
+          </p>
+          <p data-th="หน้าร้านมีแปลงผักและสมุนไพรยกพื้นไม้ ที่ครัวเก็บมาใช้จริง ๆ">
+            In front of the building there are raised timber beds of herbs and vegetables that the kitchen actually picks from.
+          </p>
+        </div>
+        <div class="row mt-l">
+          <a class="tlink" href="home.html" data-th="เรื่องของบ้านหลังนี้">More about the house <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <figure class="mt-l rv-img r-219" data-rv>
+      <img src="img/house-wide.jpg" alt="The Rosebay cottage seen from the dirt forecourt, with trees and a blue sky." loading="lazy" decoding="async">
+    </figure>
+  </div>
+</section>
+
+<!-- ===== good company ===== -->
+<section class="sect" id="pet" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">06</span>
+      <span class="label" data-th="เพื่อนร่วมโต๊ะ">Good company</span>
+    </div>
+    <div class="pet-grid">
+      <figure class="pet-fig rv-img r-45 cap">
+        <img src="img/door-pet.jpg" alt="Rosebay's timber door with a circular PET FRIENDLY decal showing a dog and a cat." loading="lazy" decoding="async">
+        <figcaption data-th="สติกเกอร์ที่ประตูร้าน">On their own door</figcaption>
+      </figure>
+      <div class="pet-txt">
+        <h2 class="display d-lg lines">
+          <span><i data-th="พามาด้วย">Bring them</i></span>
+          <span><i data-th="ได้เลย">along.</i></span>
+        </h2>
+        <p class="mt-l" style="color:var(--fg-2)" data-th="ร้านรับสัตว์เลี้ยง มีโซนด้านนอกโดยเฉพาะ มีพัดลมและร่มเงา">
+          Pets are welcome. There is a dedicated outdoor zone, with fans and shade.
+        </p>
+        <p class="note" data-th="ทางร้านยังไม่ได้ประกาศกติกาเรื่องขนาด สายจูง หรือโซนในร่ม กรุณาสอบถามพนักงานเมื่อมาถึง">
+          Rosebay has not published rules on breeds, carriers or indoor seating — please check with the team when you arrive.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 07 the gallery ===== -->
+<section class="sect ground-tint" id="gallery" data-rv>
+  <div class="wrap">
+    <div class="soc-head">
+      <div>
+        <div class="sect-label" style="margin-bottom:1rem">
+          <span class="no">07</span>
+          <span class="label" data-th="จากร้าน">From Rosebay</span>
+        </div>
+        <h2 class="display d-md" data-th="วันนี้ทำอะไรอยู่">See what&rsquo;s cooking.</h2>
+      </div>
+      <div class="soc-links">
+        <a class="tlink" href="https://www.instagram.com/rosebayhomecookingcafe/" target="_blank" rel="noopener">@rosebayhomecookingcafe <span class="arw" aria-hidden="true">↗</span></a>
+        <a class="tlink" href="https://www.facebook.com/rosebaycafe/" target="_blank" rel="noopener">Facebook <span class="arw" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ribbon" data-ribbon>
+    <ul class="ribbon-track" data-ribbon-track>
+
+      <li class="gtile">
+        <button type="button" class="gtile-btn" data-full="img/ig-kaprao.jpg"
+                data-cap="Kaprao with a fried duck egg — posted by Rosebay, 28 August."
+                data-cap-th="ข้าวกะเพราไข่ดาว จากโพสต์ของทางร้าน 28 สิงหาคม">
+          <img src="img/g/ig-kaprao.jpg" alt="Kaprao with a fried duck egg on rice." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-11">
+        <button type="button" class="gtile-btn" data-full="img/kaprao-beef.jpg"
+                data-cap="Kaprao, beef tenderloin, two fried duck eggs. ฿160."
+                data-cap-th="ข้าวกะเพราเนื้อสันใน ไข่ดาวสองฟอง 160 บาท">
+          <img src="img/g/kaprao-beef.jpg" alt="Kaprao with beef tenderloin over rice, two fried duck eggs on top." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile">
+        <button type="button" class="gtile-btn" data-full="img/latte.webp"
+                data-cap="A latte, poured at the counter."
+                data-cap-th="ลาเต้ ที่เคาน์เตอร์กาแฟ">
+          <img src="img/latte.webp" alt="A latte being poured, the rosetta forming in the cup." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-11">
+        <button type="button" class="gtile-btn" data-full="img/kaprao-crab.jpg"
+                data-cap="Kaprao, crab, fried duck egg. ฿290."
+                data-cap-th="ข้าวกะเพราปู ไข่ดาว 290 บาท">
+          <img src="img/g/kaprao-crab.jpg" alt="Kaprao with crab over rice, a fried duck egg and long beans." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-32">
+        <button type="button" class="gtile-btn" data-full="img/house-wide.jpg"
+                data-cap="The cottage from the forecourt, Nong Nam Daeng."
+                data-cap-th="ตัวบ้านมองจากลานหน้าร้าน หนองน้ำแดง">
+          <img src="img/g/house-wide.jpg" alt="The white Rosebay cottage seen from the dirt forecourt under a blue sky." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile">
+        <button type="button" class="gtile-btn" data-full="img/kaprao-mince.jpg"
+                data-cap="Kaprao fried rice, minced pork and crackling, fried egg. ฿150."
+                data-cap-th="ข้าวผัดกะเพราคลุกหมูสับกากหมูไข่ดาว 150 บาท">
+          <img src="img/g/kaprao-mince.jpg" alt="Kaprao fried rice with minced pork and crackling pork, a fried duck egg on top." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-34">
+        <button type="button" class="gtile-btn" data-full="img/sign-wall.jpg"
+                data-cap="An iced coffee, under the sign."
+                data-cap-th="กาแฟเย็น ใต้ป้ายร้าน">
+          <img src="img/g/sign-wall.jpg" alt="A hand holding an iced coffee in a Rosebay cup in front of the green ROSEBAY letters." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-11">
+        <button type="button" class="gtile-btn" data-full="img/friedrice-sau.jpg"
+                data-cap="Chinese sausage fried rice. ฿120."
+                data-cap-th="ข้าวผัดกุนเชียง 120 บาท">
+          <img src="img/g/friedrice-sau.jpg" alt="Chinese sausage fried rice with cucumber and spring onion." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-32">
+        <button type="button" class="gtile-btn" data-full="img/kitchen-cook.jpg"
+                data-cap="A cook at the open kitchen counter, mid service."
+                data-cap-th="พ่อครัวที่เคาน์เตอร์ครัวเปิด ระหว่างช่วงขายดี">
+          <img src="img/g/kitchen-cook.jpg" alt="A cook working at the white tiled counter of the open kitchen." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile">
+        <button type="button" class="gtile-btn" data-full="img/beeffat-rice.jpg"
+                data-cap="Beef-fat fried rice with beef tenderloin, garlic and a creamy omelette."
+                data-cap-th="ข้าวผัดมันเนื้อ เนื้อสันในผัดกระเทียม ไข่ข้น">
+          <img src="img/g/beeffat-rice.jpg" alt="Beef-fat fried rice with beef and a creamy omelette." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-11">
+        <button type="button" class="gtile-btn" data-full="img/sweet-fries.jpg"
+                data-cap="Sweet potato fries."
+                data-cap-th="มันหวานฟรายส์">
+          <img src="img/g/sweet-fries.jpg" alt="A plate of sweet potato fries with a sprig of herb." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-32">
+        <button type="button" class="gtile-btn" data-full="img/room.jpg"
+                data-cap="The dining room, late morning."
+                data-cap-th="ห้องอาหาร ช่วงสาย ๆ">
+          <img src="img/g/room.jpg" alt="Guests at wooden tables inside Rosebay, daylight from the windows." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile">
+        <button type="button" class="gtile-btn" data-full="img/crispy-pork.jpg"
+                data-cap="Crispy pork, greens and chilli fish sauce."
+                data-cap-th="หมูกรอบ ผัก และพริกน้ำปลา">
+          <img src="img/g/crispy-pork.jpg" alt="Crispy pork with greens on a stoneware plate." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-11">
+        <button type="button" class="gtile-btn" data-full="img/espresso.jpg"
+                data-cap="Espresso, on a timber table by the window."
+                data-cap-th="เอสเปรสโซ บนโต๊ะไม้ริมหน้าต่าง">
+          <img src="img/g/espresso.jpg" alt="A small espresso in a glass on a green saucer beside dried flowers." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-32">
+        <button type="button" class="gtile-btn" data-full="img/kaprao-table.jpg"
+                data-cap="Two plates, cucumber, and the eggs everyone comes for."
+                data-cap-th="สองจาน แตงกวา และไข่ดาวที่ทุกคนมาเพื่อสิ่งนี้">
+          <img src="img/g/kaprao-table.jpg" alt="Two plates of kaprao with fried eggs and cucumber on a wooden table." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile">
+        <button type="button" class="gtile-btn" data-full="img/omelette-beef.jpg"
+                data-cap="Minced beef over a creamy omelette."
+                data-cap-th="เนื้อสับ ราดบนไข่ข้น">
+          <img src="img/g/omelette-beef.jpg" alt="Minced beef spooned over a soft creamy omelette." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-11">
+        <button type="button" class="gtile-btn" data-full="img/pork-bites.jpg"
+                data-cap="Crispy pork, straight out of the pan."
+                data-cap-th="หมูกรอบ ร้อน ๆ จากกระทะ">
+          <img src="img/g/pork-bites.jpg" alt="Pieces of crispy pork in a bowl." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-34">
+        <button type="button" class="gtile-btn" data-full="img/coffee.webp"
+                data-cap="A cup, after lunch."
+                data-cap-th="กาแฟหนึ่งแก้ว หลังมื้อกลางวัน">
+          <img src="img/coffee.webp" alt="A cappuccino with leaf art on a wooden table." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-32">
+        <button type="button" class="gtile-btn" data-full="img/friedrice-tbl.jpg"
+                data-cap="A whole table: fried rice, soup, cucumber, lime."
+                data-cap-th="ทั้งโต๊ะ ข้าวผัด น้ำซุป แตงกวา มะนาว">
+          <img src="img/g/friedrice-tbl.jpg" alt="An overhead view of a table with fried rice, a bowl of soup, cucumber and lime." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+      <li class="gtile t-34">
+        <button type="button" class="gtile-btn" data-full="img/bench.webp"
+                data-cap="The bench outside, waiting."
+                data-cap-th="ม้านั่งหน้าร้าน">
+          <img src="img/bench.webp" alt="A bench and a rocking chair outside the white house." loading="lazy" decoding="async">
+          <span class="zoom" data-th="ขยาย">Expand</span>
+        </button>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <p class="label ribbon-hint" data-th="แตะที่ภาพเพื่อดูขนาดเต็ม · ทุกภาพเป็นภาพจริงของร้าน">
+      Tap any photograph to open it &middot; every picture here is Rosebay&rsquo;s own
+    </p>
+  </div>
+</section>
+
+<!-- the expanded view -->
+<dialog class="lb" id="lightbox" aria-label="Photograph viewer" data-th-attr="aria-label:มุมมองภาพขยาย">
+  <figure class="lb-fig">
+    <img data-lb-img alt="">
+  </figure>
+  <div class="lb-foot">
+    <p class="lb-cap" data-lb-cap></p>
+    <p class="lb-count"><span data-lb-now>1</span> / <span data-lb-all>1</span></p>
+  </div>
+  <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Close" data-th-attr="aria-label:ปิด">&#10005;</button>
+  <button type="button" class="lb-btn lb-prev" data-lb-prev aria-label="Previous photograph" data-th-attr="aria-label:ภาพก่อนหน้า">&#8592;</button>
+  <button type="button" class="lb-btn lb-next" data-lb-next aria-label="Next photograph" data-th-attr="aria-label:ภาพถัดไป">&#8594;</button>
+</dialog>
+
+<!-- ===== visit ===== -->
+<section class="sect" id="visit" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">08</span>
+      <span class="label" data-th="หนองน้ำแดง / เขาใหญ่">Nong Nam Daeng / Khao Yai</span>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-info">
+        <h2 class="display d-lg lines">
+          <span><i data-th="หาทาง">Find your</i></span>
+          <span><i data-th="กลับบ้าน">way home.</i></span>
+        </h2>
+        <dl class="facts mt-l">
+          <div class="fact">
+            <dt data-th="ที่อยู่">Address</dt>
+            <dd>339 Moo 11, Nong Nam Daeng<span class="sub">Pak Chong, Nakhon Ratchasima 30130</span></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="จุดสังเกต">Landmark</dt>
+            <dd data-th="ถ.ธนะรัชต์ KA. 4 ซอยตรงข้ามโรงเรียนบ้านนา<span class=&quot;sub&quot;>กลับรถตรงหน้าทิวเขา</span>">Thanarat Road, KA. 4 — the soi opposite Ban Na School<span class="sub">Turn back in front of the mountains</span></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="เวลาเปิด">Hours</dt>
+            <dd data-th="เปิดทุกวัน 09:00 – 18:00<span class=&quot;sub&quot;>ครัวเริ่มปิดก่อนเวลาร้านปิด</span>">Every day, 09:00 – 18:00<span class="sub">The kitchen winds down before closing</span></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="โทร">Phone</dt>
+            <dd><a href="tel:+66643614569">064-361-4569</a></dd>
+          </div>
+        </dl>
+        <div class="row mt-l">
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทางไปร้าน">Get directions <span class="arw" aria-hidden="true">↗</span></a>
+          <a class="btn btn-ghost" href="visit.html" data-th="รายละเอียดการเดินทาง">Visiting details <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="visit-map">
+        <div class="map-frame">
+          <iframe
+            title="Map showing Rosebay Home Cooking &amp; Café, Nong Nam Daeng, Pak Chong"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=101.3945%2C14.6255%2C101.4145%2C14.6355&amp;layer=mapnik&amp;marker=14.6304824%2C101.4045083"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <p class="label mt-m" data-th="พิกัด 14.63048, 101.40451 · รหัส JCJ3+5R">14.63048, 101.40451 · Plus code JCJ3+5R</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== footer ===== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-mark">ROSEBAY</div>
+    <div class="foot-grid">
+      <div>
+        <h3 data-th="ร้าน">The place</h3>
+        <ul>
+          <li>339 Moo 11, Nong Nam Daeng</li>
+          <li>Pak Chong, Nakhon Ratchasima 30130</li>
+          <li><a href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทาง ↗">Get directions ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-th="เวลาเปิด">Hours</h3>
+        <ul>
+          <li data-th="เปิดทุกวัน">Open every day</li>
+          <li>09:00 – 18:00</li>
+          <li><a href="tel:+66643614569">064-361-4569</a></li>
+          <li><a href="mailto:Rosebayhomecookingcafe@gmail.com">Rosebayhomecookingcafe@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-th="หน้าเว็บ">Pages</h3>
+        <ul>
+          <li><a href="index.html#food" data-th="อาหาร">Food</a></li>
+          <li><a href="menu.html" data-th="เมนู">Menu</a></li>
+          <li><a href="index.html#cafe" data-th="คาเฟ่">Café</a></li>
+          <li><a href="home.html" data-th="เรื่องของร้าน">Our home</a></li>
+          <li><a href="visit.html#pet" data-th="สัตว์เลี้ยง">Pet friendly</a></li>
+          <li><a href="visit.html" data-th="การเดินทาง">Visit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-th="ติดตาม">Follow</h3>
+        <ul>
+          <li><a href="https://www.instagram.com/rosebayhomecookingcafe/" target="_blank" rel="noopener">@rosebayhomecookingcafe ↗</a></li>
+          <li><a href="https://www.facebook.com/rosebaycafe/" target="_blank" rel="noopener">Rosebay Home cooking Café ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span class="foot-sign">have a wonderful day!</span>
+      <span>© <span class="num">2026</span> Rosebay Home Cooking &amp; Café</span>
+      <span data-th="เขาใหญ่ ประเทศไทย">Khao Yai, Thailand</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== mobile utility ===== -->
+<nav class="ubar" aria-label="Quick actions">
+  <a href="menu.html" data-th="เมนู">Menu</a>
+  <a href="tel:+66643614569" data-th="โทร">Call</a>
+  <a class="pri" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทาง">Directions</a>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Rosebay Home Cooking & Café",
+  "alternateName": "Rosebay Homecooking Café",
+  "description": "A Khao Yai home-cooking café with an open kitchen, serving Thai single-plate dishes — kaprao, fried rice, garlic dishes with duck eggs — alongside coffee and cakes.",
+  "servesCuisine": ["Thai", "Coffee"],
+  "priceRange": "฿฿",
+  "url": "https://rosebayhomecooking.example/",
+  "image": "img/house-front.jpg",
+  "telephone": "+66-64-361-4569",
+  "email": "Rosebayhomecookingcafe@gmail.com",
+  "hasMenu": "menu.html",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "339 Moo 11, Nong Nam Daeng",
+    "addressLocality": "Pak Chong",
+    "addressRegion": "Nakhon Ratchasima",
+    "postalCode": "30130",
+    "addressCountry": "TH"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 14.6304824, "longitude": 101.4045083 },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }],
+  "acceptsReservations": false,
+  "sameAs": [
+    "https://www.instagram.com/rosebayhomecookingcafe/",
+    "https://www.facebook.com/rosebaycafe/"
+  ]
+}
+</script>
+
+<script src="js/app.js" defer></script>
+<script src="js/pan.js" defer></script>
+<script src="js/gallery.js" defer></script>
+</body>
+</html>

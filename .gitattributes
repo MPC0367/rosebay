@@ -1,0 +1,22 @@
+# Normalise line endings in the repo, check out what each platform expects.
+* text=auto eol=lf
+
+# Windows-only build and QA scripts.
+# Note: _qa/build-artifact.ps1 is stored UTF-8 WITH a BOM on purpose —
+# PowerShell 5.1 parses a BOM-less .ps1 as ANSI and silently mangles every
+# non-ASCII literal in it. Git preserves those bytes; just don't strip it.
+*.ps1 text eol=crlf
+
+# Never touch these
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.webp binary
+*.avif binary
+*.ico  binary
+*.woff2 binary
+*.mp4  binary
+
+# Keep diffs on the data files readable
+*.json text eol=lf
+*.svg  text eol=lf

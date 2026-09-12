@@ -1,0 +1,77 @@
+{
+  "_note": "Single source of truth for everything the Rosebay team might change. Edit here, not in components. See doc/RESEARCH.md for where each fact came from.",
+
+  "name": "Rosebay Home Cooking & Café",
+  "nameTh": "โรสเบย์ โฮมคุกกิ้ง แอนด์ คาเฟ่",
+  "shortName": "Rosebay",
+  "tagline": { "en": "Home cooking & café", "th": "ครัวบ้าน และคาเฟ่" },
+  "place": { "en": "Khao Yai, Thailand", "th": "เขาใหญ่ ประเทศไทย" },
+
+  "contact": {
+    "phone": "064-361-4569",
+    "phoneIntl": "+66643614569",
+    "email": "Rosebayhomecookingcafe@gmail.com"
+  },
+
+  "address": {
+    "line1": { "en": "339 Moo 11, Nong Nam Daeng", "th": "339 หมู่ 11 ตำบลหนองน้ำแดง" },
+    "line2": { "en": "Pak Chong, Nakhon Ratchasima 30130", "th": "อำเภอปากช่อง จังหวัดนครราชสีมา 30130" },
+    "country": "Thailand",
+    "lat": 14.6304824,
+    "lng": 101.4045083,
+    "plusCode": "JCJ3+5R Nong Nam Daeng",
+    "mapsUrl": "https://www.google.com/maps/place/Rosebay+Homecooking+Caf%C3%A9/@14.6304824,101.4045083,17z/data=!4m6!3m5!1s0x311c2d945886eef5:0x79d6b106e9199224!8m2!3d14.6304824!4d101.4045083",
+    "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=14.6304824,101.4045083&destination_place_id=ChIJ9e6GWJQtHDERJJIZ6Qax1nk",
+    "landmark": {
+      "en": "Thanarat Road, around the KA. 4 marker — take the soi opposite Ban Na School.",
+      "th": "ถ.ธนะรัชต์ KA. 4 ซอยตรงข้ามโรงเรียนบ้านนา"
+    },
+    "ownWords": {
+      "th": "เขาใหญ่ ถ.ธนะรัชต์ KA. 4 ซอยตรงข้ามโรงเรียนบ้านนา กลับรถตรงหน้าทิวเขานะครับ",
+      "en": "Khao Yai, Thanarat Road, KA. 4 — the soi opposite Ban Na School. Turn back in front of the mountains."
+    }
+  },
+
+  "hours": {
+    "_source": "Rosebay's own Instagram and Facebook posts, 28-29 Aug 2026",
+    "summary": { "en": "Open every day", "th": "เปิดทุกวัน" },
+    "time": "09:00 – 18:00",
+    "opens": "09:00",
+    "closes": "18:00",
+    "days": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+    "note": {
+      "en": "The kitchen winds down before closing. If you are arriving late in the afternoon, call ahead.",
+      "th": "ครัวเริ่มปิดก่อนเวลาร้านปิด หากมาช่วงบ่ายแก่ ๆ โทรสอบถามก่อนได้"
+    },
+    "holidayOverrides": []
+  },
+
+  "announcement": {
+    "enabled": false,
+    "text": { "en": "", "th": "" },
+    "href": ""
+  },
+
+  "pet": {
+    "enabled": true,
+    "_source": "Rosebay's own PET FRIENDLY window decal, plus guest reports of a dedicated outdoor pet zone",
+    "summary": {
+      "en": "Pets are welcome. There is a dedicated outdoor zone with fans and shade.",
+      "th": "ร้านรับสัตว์เลี้ยง มีโซนด้านนอกโดยเฉพาะ มีพัดลมและร่มเงา"
+    },
+    "note": {
+      "en": "Rosebay has not published rules on breeds, carriers or indoor seating — please check with the team when you arrive.",
+      "th": "ทางร้านยังไม่ได้ประกาศกติกาเรื่องขนาด สายจูง หรือโซนในร่ม กรุณาสอบถามพนักงานเมื่อมาถึง"
+    }
+  },
+
+  "social": {
+    "instagram": { "handle": "@rosebayhomecookingcafe", "url": "https://www.instagram.com/rosebayhomecookingcafe/" },
+    "facebook": { "handle": "Rosebay Home cooking Café", "url": "https://www.facebook.com/rosebaycafe/" }
+  },
+
+  "reservations": {
+    "enabled": false,
+    "_note": "No reservation system has been verified. The site leads with directions instead of a booking funnel."
+  }
+}

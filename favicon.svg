@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- The gable of the house, and the table line beneath it. -->
+  <rect width="64" height="64" rx="10" fill="#12564C"/>
+  <path d="M14 32 L32 17 L50 32" fill="none" stroke="#F5F2E9" stroke-width="3.4"
+        stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M18 32 L18 44 L46 44 L46 32" fill="none" stroke="#F5F2E9" stroke-width="3.4"
+        stroke-linecap="square" stroke-linejoin="miter"/>
+  <circle cx="32" cy="38" r="3.4" fill="#EE7B12"/>
+</svg>

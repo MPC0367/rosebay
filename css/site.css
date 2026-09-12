@@ -1,0 +1,937 @@
+/* ==========================================================================
+   ROSEBAY HOME COOKING & CAFÉ — KHAO YAI
+   Come home hungry.  HOME × PAN × TABLE.
+
+   Colour is sampled from the building itself: the teal awning, the green
+   sign letters, the timber floor, the duck-egg yolk. Type follows their own
+   printed menu — a light, widely letterspaced geometric sans — with an
+   editorial serif carrying the voice.
+   ========================================================================== */
+
+/* --- 1. Tokens ---------------------------------------------------------- */
+
+:root {
+  /* Ground: daylight. Rosebay is a 10am–2pm brand, not a dinner brand. */
+  --paper:      #F5F2E9;   /* warm off-white, never sterile */
+  --paper-2:    #EDE8DA;   /* second ground, section alternation */
+  --paper-3:    #E3DCC9;   /* rules, chips */
+  --char:       #22251F;   /* near black — type */
+  --char-2:     #4A4E45;   /* secondary type */
+  --char-3:     #5F6459;   /* captions, metadata — 5.43:1 on paper, AA at small sizes */
+
+  --green:      #12564C;   /* Rosebay green: the awning, the sign letters */
+  --green-lit:  #2E8B84;   /* the same awning in sunlight */
+  --green-deep: #0C3D36;
+  --timber:     #8A5A3B;   /* the floor, the doors, the counter */
+  --yolk:       #EE7B12;   /* the actual duck-egg yolk. Used sparingly. */
+  --yolk-ink:   #B35600;   /* the same yolk, dark enough to carry meaning (4.42:1) */
+  --basil:      #5B8438;
+
+  /* Per-ground tokens. These cascade, so a light block inside a dark
+     section resolves correctly — the innermost ground always wins. */
+  --bg:         var(--paper);
+  --fg:         var(--char);
+  --fg-2:       var(--char-2);
+  --fg-3:       var(--char-3);
+  --rule:       #D5CDB8;
+  --accent:     var(--green);
+  --line:       var(--green);
+
+  --measure: 62ch;
+  --gut: clamp(1.25rem, 4vw, 3.5rem);
+  --sect: clamp(4.5rem, 11vw, 10rem);
+
+  /* Two motion behaviours, as briefed.
+     KITCHEN is fast and worked; HOME is slow and easy. */
+  --kitchen: 260ms cubic-bezier(.22,.9,.3,1);
+  --kitchen-slow: 420ms cubic-bezier(.22,.9,.3,1);
+  --home: 820ms cubic-bezier(.19,1,.22,1);
+  --home-long: 1100ms cubic-bezier(.19,1,.22,1);
+
+  --nav-h: 68px;
+}
+
+/* Dark ground — used only for the kitchen. The contrast is the point:
+   quiet house outside, hot dark kitchen inside. */
+.ground-kitchen {
+  --bg:   #191B17;
+  --fg:   #F2EEE2;
+  --fg-2: #C3BDAC;
+  --fg-3: #9C9686;
+  --rule: #34382F;
+  --accent: #6FBFAE;
+  --line: #6FBFAE;
+}
+.ground-tint {
+  --bg: var(--paper-2);
+  --rule: #D0C7B0;
+}
+.ground-green {
+  --bg:   var(--green);
+  --fg:   #F3F0E4;
+  --fg-2: #C6DAD3;
+  --fg-3: #A9C6BE;
+  --rule: #2C6B60;
+  --accent: #F5F2E9;
+  --line: #7FC0B3;
+}
+
+/* --- 2. Reset ----------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--char);
+  font-family: 'Jost', 'Noto Sans Thai', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1rem, .96rem + .2vw, 1.0625rem);
+  line-height: 1.62;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg, video { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, h4, p, figure, blockquote, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+::selection { background: var(--yolk); color: #fff; }
+
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 200;
+  background: var(--green); color: #fff; padding: .7rem 1.1rem;
+  border-radius: 2px; text-decoration: none;
+  transition: top var(--kitchen);
+}
+.skip:focus { top: 12px; }
+.vh {
+  position: absolute !important; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* --- 3. Type ------------------------------------------------------------ */
+
+/* Display — Fraunces. Warm, a little wonky, editorial without being luxury.
+   Optical size + soft/wonk axes keep it human at large sizes. */
+.display {
+  font-family: 'Fraunces', 'Noto Serif Thai', Georgia, serif;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1, 'opsz' 100;
+  font-weight: 600;
+  line-height: .92;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+:lang(th) .display, .display:lang(th) {
+  font-family: 'Noto Serif Thai', serif;
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: 0;
+  font-variation-settings: normal;
+}
+
+.d-xl { font-size: clamp(3.1rem, 12.5vw, 10.5rem); }
+.d-lg { font-size: clamp(2.5rem, 7.6vw, 6.2rem); }
+.d-md { font-size: clamp(2rem, 4.8vw, 3.6rem); }
+.d-sm { font-size: clamp(1.5rem, 2.9vw, 2.25rem); }
+
+/* Thai display needs its own scale — the glyphs carry more ink and the
+   ascenders/descenders stack, so the same size reads much larger. */
+:lang(th) .d-xl { font-size: clamp(2.3rem, 8vw, 6.4rem); }
+:lang(th) .d-lg { font-size: clamp(1.9rem, 5.2vw, 4rem); }
+:lang(th) .d-md { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
+:lang(th) .d-sm { font-size: clamp(1.2rem, 2.2vw, 1.6rem); }
+
+/* Label — the wide-tracked light sans lifted from their own menu headings */
+.label {
+  font-family: 'Jost', 'Noto Sans Thai', sans-serif;
+  font-size: clamp(.66rem, .62rem + .12vw, .74rem);
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  line-height: 1.4;
+}
+:lang(th) .label { letter-spacing: .08em; font-weight: 600; }
+
+.lede {
+  font-size: clamp(1.06rem, 1rem + .42vw, 1.35rem);
+  line-height: 1.62;
+  color: var(--fg-2);
+  max-width: 46ch;
+  font-weight: 300;
+}
+:lang(th) .lede { line-height: 1.92; font-weight: 400; }
+
+.body-w { max-width: var(--measure); }
+p + p { margin-top: 1em; }
+:lang(th) p { line-height: 1.95; }
+
+.num {
+  font-family: 'Jost', sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* --- 4. Layout ---------------------------------------------------------- */
+
+.wrap {
+  width: min(100% - (var(--gut) * 2), 1440px);
+  margin-inline: auto;
+}
+.wrap-n { width: min(100% - (var(--gut) * 2), 1080px); margin-inline: auto; }
+
+section { background: var(--bg); color: var(--fg); }
+.sect { padding-block: var(--sect); }
+.sect-t { padding-top: var(--sect); }
+.sect-b { padding-bottom: var(--sect); }
+
+.grid12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1rem, 2.4vw, 2rem);
+}
+@media (max-width: 860px) { .grid12 { grid-template-columns: repeat(6, 1fr); } }
+
+/* --- 5. THE TABLE LINE -------------------------------------------------- */
+/* A hairline that behaves like the edge of a table: it runs, it turns a
+   corner, it underlines a label. It is the page's structure made visible. */
+
+.tline {
+  position: relative;
+  height: 1px;
+  background: var(--rule);
+  overflow: visible;
+}
+.tline::after {
+  content: '';
+  position: absolute; inset: 0 auto 0 0;
+  width: 0; height: 1px;
+  background: var(--line);
+  transition: width var(--home-long);
+}
+.is-in .tline::after, .tline.is-in::after { width: 100%; }
+
+/* The corner: a line that turns, like the near edge of a table */
+.tline-corner {
+  position: relative;
+  padding-left: 1.4rem;
+}
+.tline-corner::before {
+  content: '';
+  position: absolute; left: 0; top: .1em; bottom: .1em;
+  width: 1px;
+  background: var(--line);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--kitchen-slow);
+}
+.is-in .tline-corner::before { transform: scaleY(1); }
+
+/* Section label with its own rule beneath — used everywhere */
+.sect-label {
+  display: flex;
+  align-items: baseline;
+  gap: .9rem;
+  padding-bottom: .85rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  position: relative;
+}
+.sect-label::after {
+  content: '';
+  position: absolute; left: 0; bottom: -1px;
+  width: 0; height: 1px; background: var(--line);
+  transition: width var(--home-long) 80ms;
+}
+.is-in .sect-label::after { width: 100%; }
+.sect-label .no {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: .14em;
+  font-size: .74rem;
+}
+
+/* --- 6. Buttons --------------------------------------------------------- */
+
+.btn {
+  --btn-fg: #F5F2E9;
+  --btn-bg: var(--green);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .95rem 1.5rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-bg);
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color var(--kitchen), border-color var(--kitchen);
+  min-height: 48px;
+}
+:lang(th) .btn { letter-spacing: .04em; text-transform: none; font-size: .9rem; }
+/* the table-line sweep */
+.btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--green-deep);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--kitchen-slow);
+  z-index: -1;
+}
+.btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
+.btn .arw { transition: transform var(--kitchen); }
+.btn:hover .arw { transform: translate(3px, -3px); }
+
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg);
+  border-color: var(--rule);
+}
+.btn-ghost::before { background: var(--fg); }
+.btn-ghost:hover, .btn-ghost:focus-visible { color: var(--bg); border-color: var(--fg); }
+
+/* On photography the ground token is wrong, so state the colours */
+.on-photo .btn-ghost {
+  --btn-fg: #FFF;
+  border-color: rgba(255,255,255,.55);
+}
+.on-photo .btn-ghost::before { background: #F5F2E9; }
+.on-photo .btn-ghost:hover, .on-photo .btn-ghost:focus-visible {
+  color: var(--char); border-color: #F5F2E9;
+}
+
+.tlink {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: .82rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  padding-bottom: .3rem;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--kitchen-slow);
+}
+:lang(th) .tlink { letter-spacing: .04em; text-transform: none; font-size: .92rem; }
+.tlink:hover, .tlink:focus-visible { background-size: 22% 1px; }
+.tlink .arw { transition: transform var(--kitchen); }
+.tlink:hover .arw { transform: translate(3px, -3px); }
+
+/* --- 7. Navigation ------------------------------------------------------ */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  transition: background var(--kitchen-slow), border-color var(--kitchen-slow), color var(--kitchen-slow);
+  border-bottom: 1px solid transparent;
+  color: #FFF;
+}
+.nav.is-stuck {
+  background: rgba(245,242,233,.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--paper-3);
+  color: var(--char);
+}
+.nav.is-solid { background: var(--paper); color: var(--char); border-bottom-color: var(--paper-3); }
+.nav-in {
+  width: min(100% - (var(--gut) * 2), 1440px);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* Wordmark — light and widely tracked, after their own */
+.mark {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.mark b {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 1.16rem;
+  letter-spacing: .34em;
+  text-indent: .34em;
+}
+.mark span {
+  font-family: 'Jost', sans-serif;
+  font-size: .5rem;
+  letter-spacing: .3em;
+  text-indent: .3em;
+  opacity: .72;
+  margin-top: .34em;
+  font-weight: 400;
+}
+
+.nav-links { display: flex; align-items: center; gap: clamp(1rem, 2vw, 1.9rem); margin-left: auto; }
+.nav-links a {
+  text-decoration: none;
+  font-size: .74rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: .4rem 0;
+  position: relative;
+  white-space: nowrap;
+}
+:lang(th) .nav-links a { letter-spacing: .04em; text-transform: none; font-size: .92rem; }
+.nav-links a::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform var(--kitchen);
+}
+.nav-links a:hover::after, .nav-links a:focus-visible::after,
+.nav-links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+@media (max-width: 1000px) { .nav-links { display: none; } }
+
+.nav-cta { margin-left: auto; display: flex; align-items: center; gap: .6rem; }
+@media (max-width: 1000px) { .nav-cta { margin-left: auto; } }
+.nav .btn-sm {
+  padding: .6rem 1rem;
+  font-size: .7rem;
+  min-height: 40px;
+}
+@media (max-width: 620px) { .nav .btn-sm { display: none; } }
+
+/* language toggle */
+.lang {
+  display: inline-flex;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: .82;
+  flex-shrink: 0;
+}
+.lang button {
+  background: none; border: 0; cursor: pointer;
+  padding: .42rem .6rem;
+  font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+  font-weight: 500;
+  min-height: 34px;
+  transition: background var(--kitchen), color var(--kitchen);
+}
+.lang button[aria-pressed="true"] { background: currentColor; }
+.lang button[aria-pressed="true"] span { color: var(--knock, #F5F2E9); }
+
+/* burger */
+.burger {
+  display: none;
+  background: none; border: 1px solid currentColor; border-radius: 2px;
+  width: 44px; height: 40px;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  flex-shrink: 0;
+}
+.burger i {
+  position: absolute; left: 11px; right: 11px; height: 1px;
+  background: currentColor;
+  transition: transform var(--kitchen), opacity var(--kitchen);
+}
+.burger i:nth-child(1) { top: 14px; }
+.burger i:nth-child(2) { top: 19px; }
+.burger i:nth-child(3) { top: 24px; }
+[aria-expanded="true"].burger i:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+[aria-expanded="true"].burger i:nth-child(2) { opacity: 0; }
+[aria-expanded="true"].burger i:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+@media (max-width: 1000px) { .burger { display: block; } }
+
+/* sheet */
+.sheet {
+  position: fixed; inset: 0; z-index: 99;
+  background: var(--paper);
+  color: var(--char);
+  padding: calc(var(--nav-h) + 2rem) var(--gut) 2rem;
+  display: flex; flex-direction: column;
+  transform: translateY(-100%);
+  transition: transform var(--kitchen-slow);
+  overflow-y: auto;
+  visibility: hidden;
+}
+.sheet.is-open { transform: none; visibility: visible; }
+.sheet nav { display: flex; flex-direction: column; }
+.sheet nav a {
+  text-decoration: none;
+  font-family: 'Fraunces', 'Noto Serif Thai', serif;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-size: clamp(1.9rem, 8vw, 2.9rem);
+  font-weight: 600;
+  line-height: 1.05;
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--paper-3);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+}
+:lang(th) .sheet nav a { font-family: 'Noto Serif Thai', serif; font-size: clamp(1.4rem, 6vw, 2.1rem); }
+.sheet nav a i {
+  font-style: normal;
+  font-family: 'Jost', sans-serif;
+  font-size: .68rem; letter-spacing: .18em; color: var(--char-3);
+}
+.sheet-foot { margin-top: auto; padding-top: 2rem; display: grid; gap: .9rem; }
+.sheet-soc { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+
+/* --- 8. Hero ------------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  min-height: calc(var(--vhpx, 8px) * 100);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #FFF;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-media { position: absolute; inset: 0; z-index: -2; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(20,24,20,.52) 0%, rgba(20,24,20,.06) 26%, rgba(20,24,20,.10) 48%, rgba(18,22,18,.80) 100%);
+}
+.hero-in { padding-bottom: clamp(2rem, 5vw, 4rem); padding-top: calc(var(--nav-h) + 2rem); }
+.hero-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .55rem 1.1rem;
+  margin-bottom: clamp(1.1rem, 3vw, 2rem);
+}
+.hero-meta .label { color: rgba(255,255,255,.9); }
+.hero-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.55); }
+.hero h1 { margin-bottom: clamp(1.2rem, 3vw, 1.9rem); }
+.hero .lede { color: rgba(255,255,255,.92); max-width: 40ch; }
+.hero-actions {
+  display: flex; flex-wrap: wrap; gap: .75rem;
+  margin-top: clamp(1.5rem, 3.5vw, 2.4rem);
+}
+.hero-foot {
+  margin-top: clamp(2rem, 5vw, 3.4rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255,255,255,.26);
+  display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; align-items: center;
+}
+.hero-foot .label { color: rgba(255,255,255,.82); }
+.hero-foot a { text-decoration: none; }
+.hero-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Line-mask reveal.
+   The mask has to clear the GLYPHS, not the line box. At line-height .92 a
+   descender (g, y, p, ฏ, ุ) sits roughly .13em below the line box and would
+   be sliced off by the clip — so the padding has to grow the masking element
+   itself. Putting it on the inner element instead, with a matching negative
+   margin, leaves the clip box exactly the same height and silently does
+   nothing: that is what cut the tail off "along."
+   The negative margin on the span takes the growth back out of the layout so
+   the vertical rhythm is unchanged, and the start position has to clear the
+   now-taller box or a sliver of the text shows through the padding before it
+   animates in. */
+.lines > span {
+  display: block;
+  overflow: hidden;
+  padding: .1em 0 .24em;
+  margin: -.1em 0 -.24em;
+}
+.lines > span > i {
+  display: block;
+  font-style: normal;
+  transform: translateY(calc(100% + .3em));
+  transition: transform var(--home-long) var(--d, 0ms);
+}
+.is-in .lines > span > i, .lines.is-in > span > i { transform: none; }
+
+/* --- 9. Reveals --------------------------------------------------------- */
+
+.rv { opacity: 0; transform: translateY(22px); transition: opacity var(--home) var(--d,0ms), transform var(--home) var(--d,0ms); }
+.is-in.rv, .is-in .rv { opacity: 1; transform: none; }
+
+.rv-img { overflow: hidden; }
+.rv-img > img, .rv-img > picture > img {
+  transform: scale(1.06);
+  transition: transform 1400ms cubic-bezier(.19,1,.22,1) var(--d,0ms), clip-path 1200ms cubic-bezier(.19,1,.22,1) var(--d,0ms);
+  clip-path: inset(0 0 100% 0);
+}
+.is-in .rv-img > img, .is-in .rv-img > picture > img,
+.rv-img.is-in > img { transform: none; clip-path: inset(0 0 0 0); }
+
+html:not(.js) .rv, html:not(.js) .lines > span > i { opacity: 1; transform: none; }
+html:not(.js) .rv-img > img { clip-path: none; transform: none; }
+
+/* --- 10. Figures -------------------------------------------------------- */
+
+figure { position: relative; }
+figure img { width: 100%; height: 100%; object-fit: cover; }
+figcaption {
+  margin-top: .8rem;
+  font-size: .74rem;
+  letter-spacing: .04em;
+  color: var(--fg-3);
+  display: flex; gap: .6rem; align-items: baseline;
+}
+:lang(th) figcaption { font-size: .84rem; }
+figcaption::before {
+  content: ''; width: 14px; height: 1px; background: var(--rule);
+  flex-shrink: 0; transform: translateY(-.35em);
+}
+.r-45  { aspect-ratio: 4/5; }
+.r-32  { aspect-ratio: 3/2; }
+.r-11  { aspect-ratio: 1/1; }
+.r-169 { aspect-ratio: 16/9; }
+.r-219 { aspect-ratio: 21/9; }
+.r-34  { aspect-ratio: 3/4; }
+@media (max-width: 720px) { .r-219 { aspect-ratio: 16/10; } }
+
+/* --- 11. Footer --------------------------------------------------------- */
+
+.foot { background: var(--green); color: #F3F0E4; padding-block: clamp(3.5rem, 8vw, 6rem) 2rem; }
+.foot a { text-decoration: none; }
+.foot-mark {
+  font-family: 'Jost', sans-serif;
+  font-weight: 200;
+  font-size: clamp(3rem, 15vw, 12rem);
+  letter-spacing: .12em;
+  line-height: .9;
+  text-indent: .12em;
+  color: #F3F0E4;
+  border-bottom: 1px solid rgba(243,240,228,.28);
+  padding-bottom: .18em;
+  margin-bottom: 2.5rem;
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 2.2rem clamp(1.5rem, 3vw, 3rem);
+}
+.foot h3 { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: #A9C6BE; font-weight: 500; margin-bottom: 1rem; }
+:lang(th) .foot h3 { letter-spacing: .06em; text-transform: none; font-size: .84rem; }
+.foot li { margin-bottom: .55rem; }
+.foot li a { background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size var(--kitchen); padding-bottom: 2px; }
+.foot li a:hover, .foot li a:focus-visible { background-size: 100% 1px; }
+.foot-note {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(243,240,228,.22);
+  display: flex; flex-wrap: wrap; gap: .6rem 1.6rem;
+  align-items: baseline;
+  font-size: .74rem; color: #A9C6BE;
+}
+:lang(th) .foot-note { font-size: .84rem; }
+.foot-sign {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  font-size: 1.15rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #F3F0E4;
+  margin-right: auto;
+}
+
+/* --- 12. Mobile utility bar -------------------------------------------- */
+
+.ubar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  display: none;
+  background: rgba(245,242,233,.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--paper-3);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.ubar a {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .95rem .5rem;
+  text-decoration: none;
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500;
+  color: var(--char);
+  min-height: 52px;
+}
+:lang(th) .ubar a { letter-spacing: .02em; text-transform: none; font-size: .86rem; }
+.ubar a + a { border-left: 1px solid var(--paper-3); }
+.ubar a.pri { background: var(--green); color: #F5F2E9; }
+@media (max-width: 780px) {
+  .ubar { display: flex; }
+  body { padding-bottom: 52px; }
+}
+
+/* --- 13. Utilities ------------------------------------------------------ */
+
+.stack   { display: grid; gap: clamp(1rem, 2.5vw, 1.6rem); }
+.stack-s { display: grid; gap: .6rem; }
+.row     { display: flex; flex-wrap: wrap; gap: .75rem; }
+.mt-l    { margin-top: clamp(2rem, 5vw, 3.4rem); }
+.mt-m    { margin-top: clamp(1.25rem, 3vw, 2rem); }
+.tr      { text-align: right; }
+.hide    { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rv, .lines > span > i { opacity: 1 !important; transform: none !important; }
+  .rv-img > img { clip-path: none !important; transform: none !important; }
+}
+
+/* --- 14. Knockout for the language toggle ------------------------------- */
+/* The pressed button fills with currentColor, so its label must be painted
+   in whatever the nav is sitting on. Over photography the nav is white, so
+   the label goes dark; once the nav is stuck on paper, it flips. */
+.nav { --knock: #1E211D; }
+.nav.is-stuck, .nav.is-solid { --knock: #F5F2E9; }
+
+/* --- 15. Hero fit ------------------------------------------------------- */
+/* Keep the last hero line clear of the mobile utility bar and the very
+   bottom edge on short viewports. */
+.hero-in { padding-bottom: clamp(2.5rem, 6vh, 4.5rem); }
+@media (max-width: 780px) { .hero-in { padding-bottom: clamp(3.5rem, 8vh, 5rem); } }
+@media (max-height: 720px) and (min-width: 781px) {
+  .hero h1 { font-size: clamp(2.6rem, 8vw, 5.6rem); }
+  .hero-foot { margin-top: clamp(1.2rem, 3vw, 2rem); }
+}
+
+/* --- 16. Nav over the open sheet ---------------------------------------- */
+/* The nav paints above the sheet. Over photography it is white, which would
+   leave the wordmark invisible against the sheet's paper ground. */
+.nav.is-over-sheet {
+  color: var(--char);
+  --knock: #F5F2E9;
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+/* --- 17. Hero art direction by width ------------------------------------ */
+/* On a narrow screen the frame is tall and the tree takes the right half, so
+   the house — the thing that has to be recognised — shifts into view, and
+   the scrim gets stronger because the copy sits over bright white siding. */
+@media (max-width: 780px) {
+  .hero-media img { object-position: 30% 46%; }
+  .hero::after {
+    background: linear-gradient(180deg,
+      rgba(20,24,20,.55) 0%,
+      rgba(20,24,20,.10) 22%,
+      rgba(20,24,20,.34) 46%,
+      rgba(16,20,16,.88) 100%);
+  }
+  .hero-meta { gap: .3rem .9rem; margin-bottom: 1.4rem; }
+}
+
+/* --- 18. Nav legibility over the hero photograph ------------------------ */
+/* Before it sticks, the nav sits on whatever the photograph happens to be.
+   The hero's top scrim does most of the work; this guarantees the rest
+   without dimming the picture. Removed the moment the nav goes solid. */
+.nav:not(.is-stuck):not(.is-solid):not(.is-over-sheet) .mark,
+.nav:not(.is-stuck):not(.is-solid):not(.is-over-sheet) .nav-links a,
+.nav:not(.is-stuck):not(.is-solid):not(.is-over-sheet) .lang {
+  text-shadow: 0 1px 10px rgba(10,14,10,.72), 0 0 26px rgba(10,14,10,.5);
+}
+.nav:not(.is-stuck):not(.is-solid):not(.is-over-sheet) .lang button[aria-pressed="true"] span {
+  text-shadow: none;
+}
+
+/* --- 19. Captioned figures ---------------------------------------------- */
+/* .rv-img clips its own overflow so the reveal wipe stays inside the frame,
+   which also clipped away any <figcaption> sitting under the picture.
+   For captioned figures the ratio moves onto the image itself and the
+   figure stops clipping; the entrance drops the 1.06 scale so nothing can
+   spill into the caption or a neighbour, and keeps the wipe. */
+figure.rv-img.cap { overflow: visible; aspect-ratio: auto; }
+figure.rv-img.cap > img { width: 100%; height: auto; object-fit: cover; }
+figure.rv-img.cap.r-45 > img  { aspect-ratio: 4/5; }
+figure.rv-img.cap.r-32 > img  { aspect-ratio: 3/2; }
+figure.rv-img.cap.r-34 > img  { aspect-ratio: 3/4; }
+figure.rv-img.cap.r-11 > img  { aspect-ratio: 1/1; }
+figure.rv-img.cap.r-169 > img { aspect-ratio: 16/9; }
+figure.rv-img.cap > img,
+.is-in figure.rv-img.cap > img { transform: none; }
+
+/* --- 20. The veil (loading) --------------------------------------------- */
+/* Rosebay's own roofline draws itself, the wordmark arrives, and the table
+   line fills with REAL progress — the signals below are actual resolved
+   assets, not a fake timer. When it is done the veil parts along that line,
+   which is the same device that rules every section heading.
+   Shown once per session: an inline <head> script stamps html.veil-skip on
+   later pages before the body paints, so navigating the site never replays
+   it. Critical styles are inlined in each page's <head> so the veil is
+   already covering the page on the first frame. */
+
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  /* Failsafe: even if the controller never runs, the veil takes itself
+     away. Nothing on this site is allowed to trap the page. */
+  animation: veil-failsafe 0s linear 5s forwards;
+}
+@keyframes veil-failsafe { to { visibility: hidden; opacity: 0; } }
+
+.veil-half {
+  position: absolute;
+  left: 0; right: 0;
+  height: 50.2%;
+  background: var(--paper);
+  transition: transform 900ms cubic-bezier(.76,0,.24,1);
+}
+.veil-top { top: 0; }
+.veil-bot { bottom: 0; }
+.veil.is-out .veil-top { transform: translateY(-100%); }
+.veil.is-out .veil-bot { transform: translateY(100%); }
+
+.veil-core {
+  position: absolute;
+  inset: 0;
+  opacity: 1;  /* overrides the critical inline rule once this sheet lands */
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1.1rem;
+  text-align: center;
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+.veil.is-out .veil-core { opacity: 0; transform: translateY(-6px); }
+
+.veil-mark { width: clamp(64px, 9vw, 96px); height: auto; overflow: visible; }
+.veil-mark path {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 3;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-dasharray: var(--len, 200);
+  /* Resting state is DRAWN, and the animation supplies the undrawn start
+     via `backwards`. The other way round — resting undrawn, animation
+     `forwards` — means anywhere animations do not run (a print path, a
+     capture tool, an engine that skips them) the mark is simply invisible.
+     The visible state must never be something an animation has to deliver. */
+  stroke-dashoffset: 0;
+  animation: veil-draw 900ms cubic-bezier(.65,0,.35,1) backwards;
+}
+.veil-mark .m-roof { animation-delay: 80ms; }
+.veil-mark .m-wall { animation-delay: 340ms; }
+@keyframes veil-draw { from { stroke-dashoffset: var(--len, 200); } }
+
+.veil-word {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2.4vw, 1.55rem);
+  letter-spacing: .42em;
+  text-indent: .42em;
+  color: var(--char);
+  animation: veil-rise 700ms cubic-bezier(.19,1,.22,1) 620ms backwards;
+}
+.veil-sub {
+  font-family: 'Jost', sans-serif;
+  font-size: .56rem;
+  letter-spacing: .34em;
+  text-indent: .34em;
+  color: var(--char-3);
+  animation: veil-rise 700ms cubic-bezier(.19,1,.22,1) 760ms backwards;
+}
+@keyframes veil-rise {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* the table line, filling with real progress */
+.veil-line {
+  width: clamp(120px, 18vw, 210px);
+  height: 1px;
+  background: var(--paper-3);
+  margin-top: .6rem;
+  overflow: hidden;
+}
+.veil-line i {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--green);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+  transition: transform 420ms cubic-bezier(.22,.9,.3,1);
+}
+
+html.veil-skip .veil,
+html:not(.js) .veil { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .veil-mark path { animation: none; }
+  .veil-word, .veil-sub { animation: none; }
+  .veil-half { transition: opacity 200ms linear; }
+  .veil.is-out { opacity: 0; }
+  .veil.is-out .veil-top, .veil.is-out .veil-bot { transform: none; }
+}
+
+/* --- 21. The language swipe --------------------------------------------- */
+/* Switching language repaints most of the page at once, which is jarring if
+   it happens in front of you. A band in Rosebay green crosses the screen and
+   the swap happens underneath it, at the moment it has the page covered. */
+
+.lswipe {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: var(--green);
+  transform: translateX(calc(var(--from, -1) * 100%));
+  pointer-events: none;
+  display: grid;
+  place-content: center;
+  visibility: hidden;
+}
+.lswipe.is-in {
+  visibility: visible;
+  transform: translateX(0);
+  transition: transform 420ms cubic-bezier(.7,0,.3,1);
+}
+.lswipe.is-out {
+  visibility: visible;
+  transform: translateX(calc(var(--from, -1) * -100%));
+  transition: transform 480ms cubic-bezier(.65,0,.35,1);
+}
+.lswipe-tag {
+  font-family: 'Fraunces', 'Noto Serif Thai', serif;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 9vw, 5.5rem);
+  line-height: 1;
+  color: #F3F0E4;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  padding: .12em 0 .2em;
+}
+.lswipe.is-in .lswipe-tag { opacity: 1; transition-delay: 140ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lswipe { display: none !important; }
+}

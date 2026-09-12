@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rosebay — every masked heading</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=Jost:wght@200;300;400;500&family=Noto+Sans+Thai:wght@300;400;500;600&family=Noto+Serif+Thai:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/parts.css">
+<style>
+  /* Every heading is shown revealed, over a magenta bar that sits exactly
+     behind the masking element. Any letter the mask is cutting will show a
+     magenta bite taken out of it. */
+  body { padding: 1.5rem 2rem 4rem; }
+  h1.qa { font: 500 13px/1.4 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: #B35600; margin-bottom: 1.5rem; }
+  .item { margin-bottom: 2.2rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--rule); }
+  .src { font: 500 11px/1.4 ui-monospace, monospace; letter-spacing: .1em; color: #5F6459; margin-bottom: .5rem; }
+  .lines > span, .rosebay span { background: #FF00A0; }
+  .lines > span > i, .rosebay b { background: var(--paper); }
+  .ground-green .lines > span > i { background: var(--green); }
+  .ground-kitchen .lines > span > i { background: #191B17; }
+</style>
+</head>
+<body class="is-in">
+<h1 class="qa">Masked headings — a magenta bite means the mask is clipping a glyph</h1>
+<div id="out"></div>
+
+<script>
+(async function () {
+  const pages = ['index', 'menu', 'home', 'visit'];
+  const out = document.getElementById('out');
+  const langs = [['en', 'ENGLISH'], ['th', 'ไทย']];
+
+  for (const p of pages) {
+    const html = await (await fetch('../' + p + '.html', { cache: 'no-store' })).text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const nodes = doc.querySelectorAll('.lines, .rosebay');
+
+    nodes.forEach(function (n, i) {
+      langs.forEach(function (pair) {
+        const lang = pair[0];
+        const clone = n.cloneNode(true);
+        clone.classList.add('is-in');
+        // swap to Thai the same way the site does
+        if (lang === 'th') {
+          clone.querySelectorAll('[data-th]').forEach(function (el) {
+            el.innerHTML = el.dataset.th;
+          });
+        }
+        // carry the ground so colours match the real page
+        const ground = n.closest('.ground-green') ? 'ground-green'
+                     : n.closest('.ground-kitchen') ? 'ground-kitchen'
+                     : n.closest('.ground-tint') ? 'ground-tint' : '';
+        const wrap = document.createElement('div');
+        wrap.className = 'item is-in ' + ground;
+        if (ground) { wrap.style.padding = '1.5rem'; }
+        wrap.setAttribute('lang', lang);
+        const tag = document.createElement('div');
+        tag.className = 'src';
+        tag.textContent = p + '.html  ·  ' + (n.classList.contains('rosebay') ? 'ROSE/BAY' : 'heading ' + (i + 1)) + '  ·  ' + pair[1];
+        wrap.appendChild(tag);
+        wrap.appendChild(clone);
+        out.appendChild(wrap);
+      });
+    });
+  }
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body>
+</html>

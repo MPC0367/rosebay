@@ -1,0 +1,181 @@
+{
+  "_note": "Dish names, Thai spellings and prices are transcribed from Rosebay's own printed menu (photographed on their Google listing). Items in the 'more' list are real dishes seen in guest reviews and photographs whose current price is not on that page — they are shown without a price on purpose. See doc/RESEARCH.md.",
+  "currency": "฿",
+  "priceNote": {
+    "en": "Prices are from Rosebay's own printed menu. Please confirm at the restaurant.",
+    "th": "ราคาจากเมนูของทางร้าน กรุณาสอบถามราคาปัจจุบันที่ร้านอีกครั้ง"
+  },
+
+  "categories": [
+    {
+      "id": "kaprao",
+      "no": "01",
+      "name": { "en": "Kaprao", "th": "กะเพรา" },
+      "blurb": {
+        "en": "The reason most people drive here. Stir-fried dry and hard over a hot pan, holy basil, and duck eggs on top.",
+        "th": "เมนูที่คนส่วนใหญ่ขับรถมาเพื่อกิน ผัดแห้งไฟแรง หอมกะเพรา ราดด้วยไข่เป็ด"
+      },
+      "items": [
+        {
+          "id": "kaprao-mince-fried-rice",
+          "en": "Kaprao fried rice, minced pork, crackling pork, fried egg",
+          "th": "ข้าวผัดกะเพราคลุกหมูสับกากหมูไข่ดาว",
+          "price": 150,
+          "protein": "pork",
+          "image": "kaprao-mince",
+          "available": true
+        },
+        {
+          "id": "kaprao-mince",
+          "en": "Kaprao minced pork, crackling pork, fried egg",
+          "th": "ข้าวกะเพราหมูสับกากหมูไข่ดาว",
+          "price": 150,
+          "protein": "pork",
+          "available": true
+        },
+        {
+          "id": "kaprao-beef",
+          "en": "Kaprao beef tenderloin, fried egg or omelette",
+          "th": "ข้าวกะเพราเนื้อสันในไข่ดาว/ไข่เจียว",
+          "price": 160,
+          "protein": "beef",
+          "featured": true,
+          "image": "kaprao-beef",
+          "available": true
+        },
+        {
+          "id": "kaprao-crab",
+          "en": "Kaprao crab, fried egg or omelette",
+          "th": "ข้าวกะเพราปูไข่ดาว/ไข่เจียว",
+          "price": 290,
+          "protein": "seafood",
+          "featured": true,
+          "image": "kaprao-crab",
+          "available": true
+        },
+        {
+          "id": "kaprao-crayfish",
+          "en": "Kaprao crayfish, fried eggs or omelette",
+          "th": "ข้าวกะเพรากั้งไข่ดาว/ไข่เจียว",
+          "price": 290,
+          "protein": "seafood",
+          "available": true
+        },
+        {
+          "id": "kaprao-scallop",
+          "en": "Kaprao scallop, fried eggs or omelette",
+          "th": "ข้าวกะเพราหอยเชลล์ไข่ดาว/ไข่เจียว",
+          "price": 290,
+          "protein": "seafood",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "friedrice",
+      "no": "02",
+      "name": { "en": "Fried rice & eggs", "th": "ข้าวผัด และไข่" },
+      "blurb": {
+        "en": "Rice fried loose, grain by grain, with the wok char guests keep writing about.",
+        "th": "ข้าวผัดเรียงเม็ด หอมกลิ่นกระทะ ที่ลูกค้าพูดถึงกันบ่อย ๆ"
+      },
+      "items": [
+        {
+          "id": "omelette-rice",
+          "en": "Rice with omelette",
+          "th": "ข้าวไข่เจียว",
+          "price": 120,
+          "protein": "veg",
+          "available": true
+        },
+        {
+          "id": "sausage-fried-rice",
+          "en": "Chinese sausage fried rice",
+          "th": "ข้าวผัดกุนเชียง",
+          "price": 120,
+          "protein": "pork",
+          "image": "friedrice-sau",
+          "available": true
+        },
+        {
+          "id": "crab-fried-rice",
+          "en": "Crab fried rice",
+          "th": "ข้าวผัดปู",
+          "price": 290,
+          "protein": "seafood",
+          "available": true
+        },
+        {
+          "id": "crayfish-garlic",
+          "en": "Crayfish fried with garlic, fried egg",
+          "th": "ข้าวกั้งผัดกระเทียมไข่ดาว",
+          "price": 290,
+          "protein": "seafood",
+          "featured": true,
+          "available": true
+        },
+        {
+          "id": "scallop-garlic",
+          "en": "Scallop fried with garlic, creamy omelette",
+          "th": "ข้าวหอยเชลล์ผัดกระเทียมไข่ข้น",
+          "price": 290,
+          "protein": "seafood",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "addon",
+      "no": "03",
+      "name": { "en": "Add on", "th": "เพิ่มเติม" },
+      "blurb": {
+        "en": "Two things worth adding to almost anything.",
+        "th": "สองอย่างที่เพิ่มลงจานไหนก็เข้ากัน"
+      },
+      "items": [
+        { "id": "extra-egg", "en": "Fried egg", "th": "ไข่ดาว", "price": 20, "available": true },
+        { "id": "extra-crackling", "en": "Crackling pork", "th": "กากหมู", "price": 50, "available": true }
+      ]
+    }
+  ],
+
+  "more": {
+    "title": { "en": "Also on the menu", "th": "เมนูอื่นในร้าน" },
+    "note": {
+      "en": "Real dishes guests order and photograph. Their prices are on menu pages we could not obtain, so we would rather leave them blank than guess — ask at the counter.",
+      "th": "เมนูจริงที่ลูกค้าสั่งกันเป็นประจำ แต่ราคาอยู่ในหน้าเมนูที่เรายังไม่มี จึงขอเว้นไว้ก่อน สอบถามที่ร้านได้เลย"
+    },
+    "groups": [
+      {
+        "name": { "en": "From the pan", "th": "จากกระทะ" },
+        "items": [
+          { "en": "Beef-fat fried rice", "th": "ข้าวผัดมันเนื้อ" },
+          { "en": "Salted-beef fried rice", "th": "ข้าวผัดเนื้อเค็ม" },
+          { "en": "Beef tenderloin, garlic, creamy omelette", "th": "ข้าวเนื้อสันในผัดกระเทียมไข่ข้น" },
+          { "en": "Crispy pork", "th": "ข้าวหมูกรอบ" },
+          { "en": "Railway fried rice", "th": "ข้าวผัดรถไฟ" },
+          { "en": "Pad see ew", "th": "ผัดซีอิ๊ว" },
+          { "en": "Kaprao, vegetarian and plant-based", "th": "ข้าวกะเพรามังสวิรัติ / เจ" }
+        ]
+      },
+      {
+        "name": { "en": "Sides", "th": "ของทานเล่น" },
+        "items": [
+          { "en": "Sweet potato fries", "th": "มันหวานฟรายส์" },
+          { "en": "Fries", "th": "มันฝรั่งฟรายส์" },
+          { "en": "Fried Chinese sausage", "th": "กุนเชียงทอด" }
+        ]
+      },
+      {
+        "name": { "en": "Coffee & sweet", "th": "กาแฟ และของหวาน" },
+        "items": [
+          { "en": "Espresso, latte, iced coffee", "th": "เอสเปรสโซ ลาเต้ กาแฟเย็น" },
+          { "en": "Matcha", "th": "มัทฉะ" },
+          { "en": "Lemongrass and mangosteen juice", "th": "น้ำตะไคร้ น้ำมังคุด" },
+          { "en": "Cakes from the cabinet", "th": "เค้กในตู้" },
+          { "en": "Mung bean & salted egg pastry", "th": "ขนมเปี๊ยะถั่วไข่เค็ม" }
+        ]
+      }
+    ]
+  }
+}

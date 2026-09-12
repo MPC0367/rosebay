@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visit — Rosebay Home Cooking &amp; Café, Khao Yai</title>
+<meta name="description" content="How to find Rosebay: 339 Moo 11, Nong Nam Daeng, Pak Chong — the soi opposite Ban Na School off Thanarat Road. Open every day 09:00–18:00. Pet friendly outdoor zone.">
+<link rel="canonical" href="https://rosebayhomecooking.example/visit.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Visit Rosebay — Khao Yai">
+<meta property="og:description" content="Down a small soi opposite Ban Na School. Open every day, 09:00–18:00.">
+<meta property="og:image" content="img/house-wide.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12564C">
+<style>
+/* Critical, so the veil already covers the page on the first painted frame —
+   before the stylesheets land. Everything else about it is in site.css. */
+.veil{position:fixed;inset:0;z-index:1000;background:#F5F2E9}
+.veil-core{opacity:0}
+html.veil-on,html.veil-on body{overflow:hidden}
+html.veil-skip .veil,html:not(.js) .veil{display:none}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=Jost:wght@200;300;400;500&family=Noto+Sans+Thai:wght@300;400;500;600&family=Noto+Serif+Thai:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/parts.css">
+<script>
+/* Reveals are hidden until JS opens them, so a script failure must not
+   leave the page blank: any script error drops the .js flag and the CSS
+   fallbacks show everything. Resource errors (a missing image) are
+   ignored — only script errors count. It also drops veil-on, because that
+   class locks scrolling. */
+document.documentElement.classList.add('js');
+addEventListener('error', function (e) {
+  if (e && e.target && e.target !== window) return;
+  document.documentElement.classList.remove('js');
+  document.documentElement.classList.remove('veil-on');
+}, true);
+/* The veil is a front door, not a toll gate: it plays once per session, so
+   moving between pages never replays it. Decided here, before the body
+   paints, or a return visit flashes it. */
+try {
+  document.documentElement.classList.add(
+    sessionStorage.getItem('rosebay.seen') ? 'veil-skip' : 'veil-on');
+} catch (e) { document.documentElement.classList.add('veil-on'); }
+/* Hard release. veil-on locks scrolling, so whatever happens to the
+   controller, the page still becomes usable — the CSS failsafe takes the
+   veil itself away on the same timer. */
+setTimeout(function () {
+  document.documentElement.classList.remove('veil-on');
+}, 5000);
+</script>
+</head>
+<body>
+<!-- The front door: Rosebay's own roofline draws, the wordmark arrives, and
+     the table line fills with real loading progress before the veil parts
+     along it. Plays once per session; removed entirely without JavaScript. -->
+<div class="veil" aria-hidden="true">
+  <div class="veil-half veil-top"></div>
+  <div class="veil-half veil-bot"></div>
+  <div class="veil-core">
+    <svg class="veil-mark" viewBox="0 0 120 62" role="presentation" focusable="false">
+      <path class="m-roof" style="--len:118" d="M14 32 L60 8 L106 32"></path>
+      <path class="m-wall" style="--len:114" d="M26 32 L26 54 L94 54 L94 32"></path>
+    </svg>
+    <div class="veil-word">ROSEBAY</div>
+    <div class="veil-sub">HOME COOKING &amp; CAFÉ</div>
+    <div class="veil-line"><i></i></div>
+  </div>
+</div>
+<a class="skip" href="#main" data-th="ข้ามไปเนื้อหาหลัก">Skip to content</a>
+
+<header class="nav is-solid">
+  <div class="nav-in">
+    <a class="mark" href="index.html" aria-label="Rosebay, home">
+      <b>ROSEBAY</b><span>HOME COOKING &amp; CAFÉ</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html#food" data-th="อาหาร">Food</a>
+      <a href="menu.html" data-th="เมนู">Menu</a>
+      <a href="home.html" data-th="เรื่องของร้าน">Our home</a>
+      <a href="index.html#cafe" data-th="คาเฟ่">Café</a>
+      <a href="visit.html#pet" data-th="สัตว์เลี้ยง">Pet friendly</a>
+      <a href="visit.html" aria-current="page" data-th="การเดินทาง">Visit</a>
+    </nav>
+    <div class="nav-cta">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true"><span>EN</span></button>
+        <button type="button" data-lang="th" aria-pressed="false"><span>ไทย</span></button>
+      </div>
+      <a class="btn btn-sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทาง">Directions <span class="arw" aria-hidden="true">↗</span></a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Menu" data-th-attr="aria-label:เมนู"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="sheet" id="sheet">
+  <nav aria-label="Mobile">
+    <a href="index.html#food"><span data-th="อาหาร">Food</span><i>01</i></a>
+    <a href="menu.html"><span data-th="เมนู">Menu</span><i>02</i></a>
+    <a href="index.html#kitchen"><span data-th="ครัวเปิด">Open kitchen</span><i>03</i></a>
+    <a href="index.html#cafe"><span data-th="คาเฟ่">Café</span><i>04</i></a>
+    <a href="home.html"><span data-th="เรื่องของร้าน">Our home</span><i>05</i></a>
+    <a href="visit.html#pet"><span data-th="สัตว์เลี้ยง">Pet friendly</span><i>06</i></a>
+    <a href="visit.html"><span data-th="การเดินทาง">Visit</span><i>07</i></a>
+  </nav>
+  <div class="sheet-foot">
+    <div class="label" data-th="เปิดทุกวัน · 09:00 – 18:00">Open every day · 09:00 – 18:00</div>
+    <a class="tlink" href="tel:+66643614569">064-361-4569</a>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="phero" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">08</span>
+      <span class="label" data-th="หนองน้ำแดง / เขาใหญ่">Nong Nam Daeng / Khao Yai</span>
+    </div>
+    <div class="phero-grid">
+      <h1 class="display d-lg lines">
+        <span><i data-th="หาทาง">Find your</i></span>
+        <span><i data-th="กลับบ้าน">way home.</i></span>
+      </h1>
+      <p class="lede rv" style="--d:320ms" data-th="ร้านอยู่ในซอยเล็ก ๆ ลูกค้าหลายคนบอกว่าถ้าไม่มี GPS ก็หลงได้ กดแผนที่ไว้ก่อนออกรถ">
+        Rosebay is down a small soi. Guests say plainly that you can get lost without a map — so set it before you drive.
+      </p>
+    </div>
+    <div class="row mt-l rv" style="--d:440ms">
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทางไปร้าน">Get directions <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="btn btn-ghost" href="tel:+66643614569" data-th="โทรหาร้าน">Call the restaurant <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sect-b" data-rv>
+  <div class="wrap">
+    <div class="visit-grid">
+      <div class="visit-info">
+        <dl class="facts">
+          <div class="fact">
+            <dt data-th="ที่อยู่">Address</dt>
+            <dd data-th="339 หมู่ 11 ตำบลหนองน้ำแดง<span class=&quot;sub&quot;>อำเภอปากช่อง จังหวัดนครราชสีมา 30130</span>">339 Moo 11, Nong Nam Daeng<span class="sub">Pak Chong, Nakhon Ratchasima 30130</span></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="ทางเข้า">The turn</dt>
+            <dd data-th="ถ.ธนะรัชต์ KA. 4 ซอยตรงข้ามโรงเรียนบ้านนา<span class=&quot;sub&quot;>กลับรถตรงหน้าทิวเขา — คำบอกทางของทางร้านเอง</span>">Thanarat Road, KA. 4 — the soi opposite Ban Na School<span class="sub">Turn back in front of the mountains — the restaurant's own wording</span></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="พิกัด">Coordinates</dt>
+            <dd><a href="https://www.google.com/maps/place/Rosebay+Homecooking+Caf%C3%A9/@14.6304824,101.4045083,17z" target="_blank" rel="noopener">14.63048, 101.40451</a><span class="sub">Plus code JCJ3+5R Nong Nam Daeng</span></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="เวลาเปิด">Hours</dt>
+            <dd data-th="เปิดทุกวัน 09:00 – 18:00<span class=&quot;sub&quot;>ครัวเริ่มปิดก่อนเวลาร้านปิด ถ้ามาช่วงบ่ายแก่ ๆ โทรถามก่อนได้</span>">Every day, 09:00 – 18:00<span class="sub">The kitchen winds down before closing. If you are arriving late in the afternoon, call ahead.</span></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="โทร">Phone</dt>
+            <dd><a href="tel:+66643614569">064-361-4569</a></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="อีเมล">Email</dt>
+            <dd><a href="mailto:Rosebayhomecookingcafe@gmail.com">Rosebayhomecookingcafe@gmail.com</a></dd>
+          </div>
+          <div class="fact">
+            <dt data-th="จอดรถ">Parking</dt>
+            <dd data-th="มีลานจอดหน้าร้าน">There is a forecourt in front of the building.</dd>
+          </div>
+          <div class="fact">
+            <dt data-th="จองโต๊ะ">Booking</dt>
+            <dd data-th="เรายังไม่พบระบบจองโต๊ะของทางร้าน แนะนำให้โทรถาม โดยเฉพาะถ้ามากันหลายคน">We have not found a booking system. Call the restaurant, especially for a larger group.</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="visit-map">
+        <div class="map-frame">
+          <iframe
+            title="Map showing Rosebay Home Cooking &amp; Café, Nong Nam Daeng, Pak Chong"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=101.3945%2C14.6255%2C101.4145%2C14.6355&amp;layer=mapnik&amp;marker=14.6304824%2C101.4045083"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="row mt-m">
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เปิดใน Google Maps">Open in Google Maps <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="rv-img r-32 mt-l cap">
+          <img src="img/house-wide.jpg" alt="What to look for on arrival: the white cottage with its teal awning, seen from the dirt forecourt." loading="lazy" decoding="async">
+          <figcaption data-th="สิ่งที่จะเห็นเมื่อมาถึง">What you are looking for</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- pet -->
+<section class="sect ground-tint" id="pet" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">06</span>
+      <span class="label" data-th="เพื่อนร่วมโต๊ะ">Good company</span>
+    </div>
+    <div class="pet-grid">
+      <figure class="pet-fig rv-img r-45 cap">
+        <img src="img/door-pet.jpg" alt="A circular PET FRIENDLY decal showing a dog and a cat, on Rosebay's timber and glass door." loading="lazy" decoding="async">
+        <figcaption data-th="สติกเกอร์ที่ประตูร้าน">On their own door</figcaption>
+      </figure>
+      <div class="pet-txt">
+        <h2 class="display d-lg lines">
+          <span><i data-th="พามาด้วย">Bring them</i></span>
+          <span><i data-th="ได้เลย">along.</i></span>
+        </h2>
+        <p class="mt-l" style="color:var(--fg-2)" data-th="ร้านรับสัตว์เลี้ยง มีโซนด้านนอกโดยเฉพาะ มีพัดลมและร่มเงา ลูกค้าเล่าตรงกันหลายคน และมีสติกเกอร์ pet friendly ติดอยู่ที่ประตูร้าน">
+          Pets are welcome. There is a dedicated outdoor zone with fans and shade — guests report it consistently, and there is a pet friendly decal on the door itself.
+        </p>
+        <p class="note" data-th="ทางร้านยังไม่ได้ประกาศกติกาเรื่องขนาด สายจูง กระเป๋า หรือโซนในร่ม เราจึงไม่เขียนแทน กรุณาสอบถามพนักงานเมื่อมาถึง">
+          Rosebay has not published rules on size, leads, carriers or indoor seating, so we are not going to write them on their behalf. Please ask the team when you arrive.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- when to come -->
+<section class="sect" data-rv>
+  <div class="wrap">
+    <div class="sect-label">
+      <span class="no">07</span>
+      <span class="label" data-th="มาตอนไหนดี">When to come</span>
+    </div>
+    <div class="grid12" style="align-items:start">
+      <div style="grid-column:1 / span 5">
+        <h2 class="display d-md" data-th="เช้าเงียบกว่า">Mornings are quieter.</h2>
+        <p class="mt-m" style="color:var(--fg-2)" data-th="ร้านเปิดเก้าโมง ช่วงกลางวันคนเยอะที่สุด ถ้าอยากได้โต๊ะสบาย ๆ มาก่อนเที่ยงดีที่สุด">
+          The doors open at nine, and the middle of the day is the busiest stretch. If you want an easy table, come before noon.
+        </p>
+        <p class="mt-m" style="color:var(--fg-3)" data-th="อาหารทำสด ๆ ทีละจาน ช่วงพีคอาจต้องรอสักหน่อย">
+          Everything is cooked to order, one plate at a time, so at the peak there is a wait.
+        </p>
+      </div>
+      <div style="grid-column:7 / span 6">
+        <div class="kstrip">
+          <figure class="rv-img r-45">
+            <img src="img/room.jpg" alt="The dining room in daylight, guests at wooden tables." loading="lazy" decoding="async">
+          </figure>
+          <figure class="rv-img r-45">
+            <img src="img/latte.webp" alt="A latte on a wooden table." loading="lazy" decoding="async">
+          </figure>
+          <figure class="rv-img r-45">
+            <img src="img/bench.webp" alt="A bench and rocking chair outside the house." loading="lazy" decoding="async">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-mark">ROSEBAY</div>
+    <div class="foot-grid">
+      <div>
+        <h3 data-th="ร้าน">The place</h3>
+        <ul>
+          <li>339 Moo 11, Nong Nam Daeng</li>
+          <li>Pak Chong, Nakhon Ratchasima 30130</li>
+          <li><a href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทาง ↗">Get directions ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-th="เวลาเปิด">Hours</h3>
+        <ul>
+          <li data-th="เปิดทุกวัน">Open every day</li>
+          <li>09:00 – 18:00</li>
+          <li><a href="tel:+66643614569">064-361-4569</a></li>
+          <li><a href="mailto:Rosebayhomecookingcafe@gmail.com">Rosebayhomecookingcafe@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-th="หน้าเว็บ">Pages</h3>
+        <ul>
+          <li><a href="index.html#food" data-th="อาหาร">Food</a></li>
+          <li><a href="menu.html" data-th="เมนู">Menu</a></li>
+          <li><a href="index.html#cafe" data-th="คาเฟ่">Café</a></li>
+          <li><a href="home.html" data-th="เรื่องของร้าน">Our home</a></li>
+          <li><a href="visit.html#pet" data-th="สัตว์เลี้ยง">Pet friendly</a></li>
+          <li><a href="visit.html" data-th="การเดินทาง">Visit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-th="ติดตาม">Follow</h3>
+        <ul>
+          <li><a href="https://www.instagram.com/rosebayhomecookingcafe/" target="_blank" rel="noopener">@rosebayhomecookingcafe ↗</a></li>
+          <li><a href="https://www.facebook.com/rosebaycafe/" target="_blank" rel="noopener">Rosebay Home cooking Café ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span class="foot-sign">have a wonderful day!</span>
+      <span>© <span class="num">2026</span> Rosebay Home Cooking &amp; Café</span>
+      <span data-th="เขาใหญ่ ประเทศไทย">Khao Yai, Thailand</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="ubar" aria-label="Quick actions">
+  <a href="menu.html" data-th="เมนู">Menu</a>
+  <a href="tel:+66643614569" data-th="โทร">Call</a>
+  <a class="pri" href="https://www.google.com/maps/dir/?api=1&amp;destination=14.6304824,101.4045083" target="_blank" rel="noopener" data-th="เส้นทาง">Directions</a>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Rosebay Home Cooking & Café",
+  "url": "https://rosebayhomecooking.example/visit.html",
+  "telephone": "+66-64-361-4569",
+  "email": "Rosebayhomecookingcafe@gmail.com",
+  "hasMenu": "menu.html",
+  "servesCuisine": ["Thai", "Coffee"],
+  "priceRange": "฿฿",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "339 Moo 11, Nong Nam Daeng",
+    "addressLocality": "Pak Chong",
+    "addressRegion": "Nakhon Ratchasima",
+    "postalCode": "30130",
+    "addressCountry": "TH"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 14.6304824, "longitude": 101.4045083 },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }],
+  "acceptsReservations": false,
+  "sameAs": [
+    "https://www.instagram.com/rosebayhomecookingcafe/",
+    "https://www.facebook.com/rosebaycafe/"
+  ]
+}
+</script>
+
+<script src="js/app.js" defer></script>
+</body>
+</html>
