@@ -935,3 +935,30 @@ html:not(.js) .veil { display: none !important; }
 @media (prefers-reduced-motion: reduce) {
   .lswipe { display: none !important; }
 }
+
+/* --- 22. Concept disclosure --------------------------------------------- */
+/* This site carries a real restaurant's photography, menu and phone number.
+   Published anywhere public it has to say plainly, on every page, that it is
+   not theirs — and point at the channels that actually are. Quiet, but not
+   hidden: full contrast against the footer ground, not a greyed-out legal
+   line nobody reads. */
+.foot-disclosure {
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(243,240,228,.22);
+  max-width: 74ch;
+  font-size: .82rem;
+  line-height: 1.7;
+  color: #C6DAD3;
+}
+:lang(th) .foot-disclosure { font-size: .9rem; line-height: 1.95; }
+.foot-disclosure a {
+  color: #F3F0E4;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 1px;
+  transition: background-size var(--kitchen);
+}
+.foot-disclosure a:hover, .foot-disclosure a:focus-visible { background-size: 0% 1px; }

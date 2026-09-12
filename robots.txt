@@ -1,0 +1,5 @@
+# Unsolicited concept site for a real restaurant, published for portfolio
+# review only. It is not Rosebay Home Cooking & Cafe's website and must not
+# appear in results for anyone searching for them.
+User-agent: *
+Disallow: /
