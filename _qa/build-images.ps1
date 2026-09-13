@@ -47,7 +47,6 @@ $plan = @(
   # --- food, clean guest photographs with nothing burnt in
   @{ n='omelette-beef'; s='gm-09.jpg';              max=1600 }
   @{ n='kaprao-table';  s='gm-18.jpg';              max=1600 }
-  @{ n='kaprao-over';   s='gm-24.jpg';              max=1600 }
   @{ n='kaprao-rice';   s='gm-23.jpg';              max=1600 }
   @{ n='friedrice-sau'; s='gm-05.jpg';              max=1600 }
   @{ n='friedrice-tbl'; s='gm-22.jpg';              max=1600 }

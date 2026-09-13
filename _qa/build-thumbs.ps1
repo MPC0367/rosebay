@@ -14,7 +14,7 @@ $names = @(
   'ig-kaprao','kaprao-beef','kaprao-crab','kaprao-mince','kaprao-table',
   'friedrice-sau','friedrice-tbl','crispy-pork','sweet-fries','beeffat-rice',
   'omelette-beef','two-plates','espresso','sign-wall','room','house-wide',
-  'kitchen-cook','pork-bites','kaprao-over','ig-rice'
+  'kitchen-cook','pork-bites','ig-rice'
 )
 
 $codec = [Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }

@@ -165,7 +165,6 @@ $imgJson = "{" + (($map.Keys | ForEach-Object { '"' + $_ + '":"' + $map[$_] + '"
 $css = (Read-Utf8 (Join-Path $Root 'css\site.css')) + "`n" + (Read-Utf8 (Join-Path $Root 'css\parts.css'))
 $menuJson = Read-Utf8 (Join-Path $Root 'data\menu.json')
 $jsApp     = Read-Utf8 (Join-Path $Root 'js\app.js')
-$jsPan     = Read-Utf8 (Join-Path $Root 'js\pan.js')
 $jsMenu    = Read-Utf8 (Join-Path $Root 'js\menu.js')
 $jsGallery = Read-Utf8 (Join-Path $Root 'js\gallery.js')
 
@@ -353,9 +352,6 @@ $jsApp
 </script>
 <script>
 $bootJs
-</script>
-<script>
-$jsPan
 </script>
 <script>
 $jsMenu

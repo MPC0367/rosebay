@@ -31,7 +31,6 @@ img/ig-kaprao.jpg
 img/kaprao-beef.jpg
 img/kaprao-crab.jpg
 img/kaprao-mince.jpg
-img/kaprao-over.jpg
 img/kaprao-table.jpg
 img/kitchen-cook.jpg
 img/kitchen-pass.jpg

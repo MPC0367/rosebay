@@ -54,18 +54,6 @@ numerals are **Jost**. The voice is **Fraunces** — warm and slightly wonky,
 editorial rather than luxury. Thai gets its own art direction and its own type
 scale, not a shrunken copy of the English one.
 
-### The signature interaction — from pan to plate
-
-`index.html#kitchen`. A circle holds still while you scroll past it. It starts
-small, dark, warm and saturated — a pan in the middle of service — and grows
-wide, bright and clean until it is a plate on a table. A teal arc traces the rim
-as progress. Four stages, four real photographs, nothing simulated:
-
-1. the pass during service · 2. the open kitchen · 3. the eggs · 4. the plate
-
-The heat is a `sepia() saturate() brightness()` filter interpolated from the same
-scroll value that drives the scale, so warmth and size resolve together.
-
 ### The gallery — a running ribbon
 
 Section 07 is a feed, so it behaves like one. Twenty of Rosebay's own
@@ -150,7 +138,7 @@ across a button on hover, and closes the footer.
 
 | File | What it is |
 |---|---|
-| `index.html` | Arrive → the flip → the food → pan to plate → café → the name → pets → social → visit |
+| `index.html` | Arrive → the flip → the food → café → the name → pets → social → visit |
 | `menu.html` | The real menu, rendered from `data/menu.json`. Sticky category nav, prices aligned, Thai under every dish. |
 | `home.html` | The house, the name, the garden beds, the open kitchen, the room |
 | `visit.html` | Directions, hours, contact, parking, pet policy, when to come |
@@ -234,15 +222,13 @@ everything if no scroll signal ever arrives.
 
 **No layout depends on `svh`.** In a host that reports a zero-height viewport,
 `svh` resolves to `0px` — and a section sized purely in `svh` collapses to
-nothing, taking the signature interaction with it. Heights come from `--vhpx`,
-which has a static CSS fallback and is refined by JS only when the measurement is
-plausible.
+nothing. Heights come from `--vhpx`, which has a static CSS fallback and is
+refined by JS only when the measurement is plausible.
 
 **A script error cannot blank the page.** Reveals start hidden and are opened by
 JS, so the inline head script drops the `.js` flag on any script error and the
 `html:not(.js)` rules show everything. Verified with JS fully disabled: the hero
-renders, the headline is visible, and the pan section becomes a readable stack
-instead of a 3,700px dead zone.
+renders and the headline is visible.
 
 **Masking must clear the glyphs, not the line box.** The line-mask reveal
 clips each line so it can wipe in. At `line-height: .92` a descender — g, y, p,
@@ -271,7 +257,7 @@ so a light block nested in a dark section always resolves correctly.
 ```powershell
 cd _qa
 .\shot.ps1 -Page index                      # desktop, 1440 viewport
-.\shot.ps1 -Page index -To '%23kitchen'     # land on a section
+.\shot.ps1 -Page index -To '%23cafe'        # land on a section
 .\shot.ps1 -Page menu -Mobile               # true 390x844 via an iframe wrapper
 .\shot.ps1 -Page index -Lang th             # Thai
 .\shot.ps1 -Page index -Probe               # overflow + contrast report

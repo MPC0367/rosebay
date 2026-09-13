@@ -87,124 +87,6 @@
 }
 .table-shot figcaption::before { background: rgba(255,255,255,.6); }
 
-/* --- THE PAN: from pan to plate ---------------------------------------- */
-/* A circle stays put while you scroll. It starts small and dark — a pan in
-   a hot kitchen — and grows bright and wide until it is a plate on a table.
-   Real photographs throughout; nothing is simulated. */
-
-.pan {
-  position: relative;
-  /* Four stages, each one viewport tall. The height is driven by --vhpx
-     rather than svh: a host that reports a zero-height viewport (an
-     embedded viewer, a backgrounded frame) resolves svh to 0px and this
-     whole section — the signature — would silently collapse to nothing.
-     --vhpx has a static fallback and app.js refines it when it can
-     actually measure. */
-  height: calc(var(--vhpx, 8px) * 460);
-}
-.pan-sticky {
-  position: sticky;
-  top: 0;
-  height: calc(var(--vhpx, 8px) * 100);
-  /* Rows, not absolute positioning: the stage takes whatever height is
-     left over, so the caption can never be clipped off the bottom of a
-     short viewport. */
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  align-items: center;
-  justify-items: center;
-  gap: clamp(.6rem, 2vh, 1.4rem);
-  padding: clamp(4.5rem, 11vh, 7rem) var(--gut) clamp(1.4rem, 4vh, 2.8rem);
-  overflow: hidden;
-}
-.pan-stage {
-  position: relative;
-  height: 100%;
-  aspect-ratio: 1;
-  /* max-width alone turns the disc into an ellipse on a tall narrow screen:
-     the width gets clamped while height:100% keeps its full value. Capping
-     both keeps it a circle whichever axis is the constraint. */
-  max-width: 86vw;
-  max-height: 86vw;
-  display: grid;
-  place-items: center;
-}
-.pan-disc {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  overflow: hidden;
-  transform: scale(var(--s, .42));
-  transition: transform 120ms linear, filter 200ms linear;
-  box-shadow: 0 30px 90px -30px rgba(0,0,0,.7);
-  background: #0D0F0C;
-  /* Warm, dark and saturated while it is still a pan; clean and bright by
-     the time it is a plate on the table. --heat runs 1 to 0 with scroll. */
-  filter:
-    sepia(calc(var(--heat, 1) * .34))
-    saturate(calc(1 + var(--heat, 1) * .45))
-    brightness(calc(1 - var(--heat, 1) * .16));
-}
-.pan-disc img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  /* favour the counter and the cooks over the ceiling */
-  object-position: 50% 62%;
-  opacity: 0;
-  transition: opacity 420ms ease;
-}
-.pan-disc img.on { opacity: 1; }
-/* heat: a warm wash that cools as the dish reaches the table */
-.pan-disc::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 62%, rgba(238,123,18,.42), rgba(150,40,0,.18) 55%, transparent 72%);
-  opacity: var(--heat, 1);
-  transition: opacity 200ms linear;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-/* the rim arc — progress around the pan */
-.pan-rim { position: absolute; inset: -2.4%; pointer-events: none; }
-.pan-rim circle {
-  fill: none;
-  stroke-width: 1.1;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-}
-.pan-rim .trk { stroke: rgba(243,240,228,.16); }
-.pan-rim .bar { stroke: var(--green-lit); stroke-linecap: round; transition: stroke-dashoffset 120ms linear; }
-
-/* caption block beside/under the pan */
-.pan-cap {
-  text-align: center;
-  width: min(92vw, 640px);
-  z-index: 3;
-}
-.pan-step { display: none; }
-.pan-step.on { display: block; }
-.pan-step .label { color: #6FBFAE; margin-bottom: .6rem; }
-.pan-step h3 { color: #F3F0E4; }
-.pan-step p { color: rgba(243,240,228,.78); margin-top: .7rem; max-width: 46ch; margin-inline: auto; font-weight: 300; }
-:lang(th) .pan-step p { font-weight: 400; }
-
-.pan-ticks {
-  display: flex; gap: .5rem; z-index: 3;
-}
-.pan-ticks i {
-  width: 26px; height: 2px; background: rgba(243,240,228,.22);
-  transition: background var(--kitchen);
-}
-.pan-ticks i.on { background: var(--green-lit); }
-
-@media (max-width: 700px) {
-  .pan-stage { max-width: 92vw; max-height: 92vw; }
-  .pan-step h3 { font-size: clamp(1.5rem, 6vw, 2rem); }
-  .pan-step p { font-size: .95rem; }
-}
-
 /* --- Café --------------------------------------------------------------- */
 
 .cafe-grid {
@@ -556,18 +438,6 @@
 html:not(.js) .rosebay b,
 html:not(.js) .rosebay .gloss { opacity: 1; transform: none; }
 
-/* The pan becomes a plain, readable stack: the finished plate, full size,
-   with every stage's words shown in order. */
-html:not(.js) .pan { height: auto; }
-html:not(.js) .pan-sticky { position: static; height: auto; padding-block: clamp(3rem, 8vw, 6rem); }
-html:not(.js) .pan-disc { transform: none; filter: none; }
-html:not(.js) .pan-disc img { opacity: 0; }
-html:not(.js) .pan-disc img:last-child { opacity: 1; }
-html:not(.js) .pan-disc::after { opacity: .12; }
-html:not(.js) .pan-step { display: block; margin-top: 1.6rem; }
-html:not(.js) .pan-ticks { display: none; }
-html:not(.js) .pan-rim { display: none; }
-
 /* --- THE RIBBON: a running gallery -------------------------------------- */
 /* Section 07 is a feed, so it behaves like one: the photographs travel past
    on their own, stop the moment you reach for them, and open full size when
@@ -760,10 +630,4 @@ html:not(.js) .ribbon-track { animation: none; }
   .lb-prev { left: .5rem; }
   .lb-next { right: .5rem; }
   .lb-fig { padding-inline: 3.25rem; }
-}
-
-/* The mobile utility bar sits over the bottom of every fixed-height section,
-   so the pinned pan has to end above it or its caption is read half-hidden. */
-@media (max-width: 780px) {
-  .pan-sticky { padding-bottom: calc(52px + clamp(1rem, 3vh, 2rem)); }
 }
